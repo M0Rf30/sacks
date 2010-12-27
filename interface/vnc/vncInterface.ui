@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VncInterface</class>
+ <widget class="QMainWindow" name="VncInterface">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>509</width>
+    <height>381</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>RemoteScreen Interface</string>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>503</width>
+         <height>319</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>509</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuRemoteScreen">
+    <property name="title">
+     <string>Screen</string>
+    </property>
+    <addaction name="actionConnectScreen"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menuRemoteScreen"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>RemoteScreen ToolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionConnectScreen"/>
+  </widget>
+  <action name="actionConnectScreen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="vnc.qrc">
+     <normaloff>:/vnc/images/vnc/rfbdrake.png</normaloff>:/vnc/images/vnc/rfbdrake.png</iconset>
+   </property>
+   <property name="text">
+    <string>Connect Screen</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="vnc.qrc"/>
+ </resources>
+ <connections/>
+</ui>

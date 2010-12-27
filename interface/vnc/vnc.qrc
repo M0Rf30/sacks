@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="vnc" >
+    <file>../images/vnc/rfbdrake.png</file>
+  </qresource>
+</RCC>

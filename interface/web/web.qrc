@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="web" >
+    <file>../images/actions/filefind.png</file>
+    <file>../images/actions/bookmark_add.png</file>
+    <file>../images/actions/fileprint.png</file>
+    <file>../images/actions/back.png</file>
+    <file>../images/actions/forward.png</file>
+    <file>../images/actions/stop.png</file>
+    <file>../images/actions/reload.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource>
+<file>qt_it.qm</file>
+<file>sacks_it.qm</file>
+</qresource>
+</RCC>

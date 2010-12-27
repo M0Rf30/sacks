@@ -1,0 +1,760 @@
+Help on module vlc:
+
+NAME
+    vlc - VLC media player embedding module.
+
+FILE
+    c:\python26\lib\site-packages\vlc.pyd
+
+CLASSES
+    __builtin__.object
+        Instance
+        Media
+        MediaControl
+        MediaPlayer
+        Position
+    exceptions.Exception(exceptions.BaseException)
+        InstanceException
+        InternalException
+        InvalidPosition
+        InvalidPosition
+        PlaylistException
+        PositionKeyNotSupported
+    
+    class Instance(__builtin__.object)
+     |  VLC Instance(args)
+     |  
+     |  Methods defined here:
+     |  
+     |  audio_get_channel(...)
+     |      audio_get_channel() -> int  Get current audio channel
+     |  
+     |  audio_get_mute(...)
+     |      audio_get_mute() -> int     Get the mute state
+     |  
+     |  audio_get_volume(...)
+     |      audio_get_volume() -> int   Get the audio volume
+     |  
+     |  audio_set_channel(...)
+     |      audio_set_channel(int)      Set current audio channel
+     |  
+     |  audio_set_mute(...)
+     |      audio_set_mute(state=int)         Set the mute state
+     |  
+     |  audio_set_volume(...)
+     |      audio_set_volume(volume=int)       Set the audio volume
+     |  
+     |  audio_toggle_mute(...)
+     |      audio_toggle_mute()         Toggle the mute state
+     |  
+     |  get_vlc_id(...)
+     |      get_vlc_id( ) -> int        Get the instance id.
+     |  
+     |  media_new(...)
+     |      media_new(str) -> object   Create a media object with the given mrl.
+     |  
+     |  mediaplayer_new(...)
+     |      mediaplayer_new() -> object   Create a media player.
+     |  
+     |  video_get_parent(...)
+     |      video_get_parent() -> int       Get the parent xid/HWND/CGrafPort
+     |  
+     |  video_set_parent(...)
+     |      video_set_parent(xid=int)       Set the parent xid/HWND/CGrafPort
+     |  
+     |  video_set_size(...)
+     |      video_set_size(width=int, height=int)    Set the video width and height
+     |  
+     |  vlm_add_broadcast(...)
+     |      vlm_add_broadcast(name=str, input=str, output=str, options=list, enable=int, loop=int)   Add a new broadcast
+     |  
+     |  vlm_add_input(...)
+     |      vlm_add_input(name=str, output=str)       Add a media's input MRL
+     |  
+     |  vlm_change_media(...)
+     |      vlm_change_media(name=str, input=str, output=str, options=list, enable=int, loop=int)   Change the broadcast parameters
+     |  
+     |  vlm_del_media(...)
+     |      vlm_del_media(name=str)    Delete a media
+     |  
+     |  vlm_pause_media(...)
+     |      vlm_pause_media(name=str)      Pauses the named broadcast.
+     |  
+     |  vlm_play_media(...)
+     |      vlm_play_media(name=str)       Plays the named broadcast.
+     |  
+     |  vlm_seek_media(...)
+     |      vlm_seek_media(name=str, percentage=float)  Seeks in the named broadcast.
+     |  
+     |  vlm_set_enabled(...)
+     |      vlm_set_enabled(name=str, enabled=int)    Enable/disable a media
+     |  
+     |  vlm_set_input(...)
+     |      vlm_set_input(name=str, output=str)       Set the input
+     |  
+     |  vlm_set_loop(...)
+     |      vlm_set_loop(name=str, loop=int)          Change the looping value
+     |  
+     |  vlm_set_output(...)
+     |      vlm_set_output(name=str, output=str)      Set the output
+     |  
+     |  vlm_show_media(...)
+     |      vlm_show_media(name=str)       Return information of the named broadcast.
+     |  
+     |  vlm_stop_media(...)
+     |      vlm_stop_media(name=str)       Stops the named broadcast.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x00BF7560>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class InstanceException(exceptions.Exception)
+     |  Method resolution order:
+     |      InstanceException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x1E1D14B0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class InternalException(exceptions.Exception)
+     |  Method resolution order:
+     |      InternalException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x1E1D14B0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class InvalidPosition(exceptions.Exception)
+     |  Method resolution order:
+     |      InvalidPosition
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x1E1D14B0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class Media(__builtin__.object)
+     |  vlc.Media object.
+     |  
+     |  Methods defined here:
+     |  
+     |  add_option(...)
+     |      add_option(str) Add an option to the media.
+     |  
+     |  get_duration(...)
+     |      get_duration() -> int
+     |  
+     |  get_meta(...)
+     |      get_meta(str) -> str   Read the meta of the media.
+     |  
+     |  get_mrl(...)
+     |      get_mrl() -> str
+     |  
+     |  get_state(...)
+     |      get_state() -> int
+     |  
+     |  is_preparsed(...)
+     |      is_preparsed() -> int
+     |  
+     |  mediaplayer_new(...)
+     |      mediaplayer_new() -> vlc.MediaPlayer   Create a MediaPlayer object from a Media
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x00BF7A60>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class MediaControl(__builtin__.object)
+     |  Control of a VLC instance.
+     |  
+     |  vlc.MediaControl(args): initialisation with a list of VLC parameters.
+     |  vlc.MediaControl(instance): initialisation with an existing vlc.Instance
+     |  
+     |  Methods defined here:
+     |  
+     |  display_text(...)
+     |      display_text( str, Position, Position )    Display a text on the video
+     |  
+     |  exit(...)
+     |      exit( )                     Exit the player
+     |  
+     |  get_fullscreen(...)
+     |      get_fullscreen( ) -> int       Get the fullscreen status
+     |  
+     |  get_media_position(...)
+     |      get_media_position( origin, key ) -> Position    Get current media position.
+     |  
+     |  get_mediaplayer(...)
+     |      get_mediaplayer( ) -> MediaPlayer    Get embedded vlc.MediaPlayer.
+     |  
+     |  get_mrl(...)
+     |      get_mrl( ) -> str       Get the played file
+     |  
+     |  get_rate(...)
+     |      get_rate( ) -> int       Get the rate
+     |  
+     |  get_stream_information(...)
+     |      get_stream_information( ) -> dict      Get information about the stream
+     |  
+     |  get_vlc_instance(...)
+     |      get_vlc_instance( ) -> Instance    Get embedded vlc.Instance.
+     |  
+     |  pause(...)
+     |      pause( Position )         Pause the player.
+     |  
+     |  resume(...)
+     |      resume( Position )        Resume the player
+     |  
+     |  set_fullscreen(...)
+     |      set_fullscreen( int )              Set the fullscreen status
+     |  
+     |  set_media_position(...)
+     |      set_media_position( Position )            Set media position
+     |  
+     |  set_mrl(...)
+     |      set_mrl( str )               Set the file to be played
+     |  
+     |  set_rate(...)
+     |      set_rate( int )              Set the rate
+     |  
+     |  set_visual(...)
+     |      set_visual( int )           Set the embedding window visual ID
+     |  
+     |  snapshot(...)
+     |      snapshot( Position ) -> dict        Take a snapshot
+     |  
+     |  sound_get_volume(...)
+     |      sound_get_volume( ) -> int       Get the volume
+     |  
+     |  sound_set_volume(...)
+     |      sound_set_volume( int )           Set the volume
+     |  
+     |  start(...)
+     |      start( Position )         Start the player.
+     |  
+     |  stop(...)
+     |      stop( Position )              Stop the player
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x00BF7160>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class MediaPlayer(__builtin__.object)
+     |  vlc.MediaPlayer object
+     |  
+     |  It cannot be instantiated standalone, it must be obtained from an existing vlc.Instance object
+     |  
+     |  Methods defined here:
+     |  
+     |  audio_get_track(...)
+     |      audio_get_track() -> int    Get current audio track
+     |  
+     |  audio_set_track(...)
+     |      audio_set_track(int)        Set current audio track
+     |  
+     |  can_pause(...)
+     |      can_pause() -> int
+     |  
+     |  get_aspect_ratio(...)
+     |      get_aspect_ratio() -> str    Get current video aspect ratio
+     |  
+     |  get_chapter(...)
+     |      get_chapter() -> int    Get current chapter
+     |  
+     |  get_chapter_count(...)
+     |      get_chapter_count() -> int    Get current chapter count
+     |  
+     |  get_fps(...)
+     |      get_fps() -> float
+     |  
+     |  get_fullscreen(...)
+     |      get_fullscreen() -> bool    Get current fullscreen status
+     |  
+     |  get_height(...)
+     |      get_height() -> int           Get current video height
+     |  
+     |  get_length(...)
+     |      get_length() -> long
+     |  
+     |  get_media(...)
+     |      get_media() -> vlc.Media    Get the media used by the media_player (if any).
+     |  
+     |  get_position(...)
+     |      get_position() -> float
+     |  
+     |  get_rate(...)
+     |      get_rate() -> float
+     |  
+     |  get_spu(...)
+     |      get_spu() -> int   Get current video subtitle
+     |  
+     |  get_state(...)
+     |      get_state() -> int
+     |  
+     |  get_time(...)
+     |      get_time() -> long
+     |  
+     |  get_width(...)
+     |      get_width() -> int           Get current video width
+     |  
+     |  has_vout(...)
+     |      has_vout() -> int
+     |  
+     |  is_seekable(...)
+     |      is_seekable() -> int
+     |  
+     |  pause(...)
+     |      pause()   Pause the media instance
+     |  
+     |  play(...)
+     |      play()    Play the media instance
+     |  
+     |  set_aspect_ratio(...)
+     |      set_aspect_ratio(str)        Set new video aspect ratio
+     |  
+     |  set_chapter(...)
+     |      set_chapter(int)        Set current chapter
+     |  
+     |  set_drawable(...)
+     |      set_drawable()    Set the drawable id
+     |  
+     |  set_fullscreen(...)
+     |      set_fullscreen(bool)    Enable or disable fullscreen on a video output
+     |  
+     |  set_media(...)
+     |      set_media(vlc.Media)        Set the media that will be used by the media_player
+     |  
+     |  set_position(...)
+     |      set_position(float)
+     |  
+     |  set_rate(...)
+     |      set_rate(float)
+     |  
+     |  set_spu(...)
+     |      set_spu(int)      Set new video subtitle
+     |  
+     |  set_time(...)
+     |      set_time(long)
+     |  
+     |  stop(...)
+     |      stop()    Stop the media instance
+     |  
+     |  toggle_fullscreen(...)
+     |      toggle_fullscreen()    Toggle fullscreen status on video output
+     |  
+     |  video_reparent(...)
+     |      video_reparent(visual=int)               change the parent for the current video output
+     |  
+     |  video_resize(...)
+     |      video_resize(width=int, height=int)      Resize the current video output window
+     |  
+     |  video_take_snapshot(...)
+     |      video_take_snapshot(filename=str)        Take a snapshot of the current video window
+     |  
+     |  will_play(...)
+     |      will_play() -> int
+    
+    class PlaylistException(exceptions.Exception)
+     |  Method resolution order:
+     |      PlaylistException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x1E1D14B0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class Position(__builtin__.object)
+     |  Represent a Position with value, origin and key
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  key
+     |      Position key
+     |  
+     |  origin
+     |      Position origin
+     |  
+     |  value
+     |      Position value
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x00BF72A0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+    
+    class PositionKeyNotSupported(exceptions.Exception)
+     |  Method resolution order:
+     |      PositionKeyNotSupported
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x1E1D14B0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    PositionOriginNotSupported = class InvalidPosition(exceptions.Exception)
+     |  Method resolution order:
+     |      InvalidPosition
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x1E1D14B0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+
+DATA
+    AbsolutePosition = 0
+    ByteCount = 0
+    EndStatus = 6
+    InitStatus = 1
+    MediaTime = 2
+    ModuloPosition = 2
+    PauseStatus = 4
+    PlayingStatus = 3
+    RelativePosition = 1
+    SampleCount = 1
+    UndefinedStatus = 0
+
+

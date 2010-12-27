@@ -1,0 +1,266 @@
+Usage: vlc [options] [stream] ...
+You can specify multiple streams on the commandline. They will be enqueued in the playlist.
+The first item specified will be played first.
+
+Options-styles:
+  --option  A global option that is set for the duration of the program.
+   -option  A single letter version of a global --option.
+   :option  An option that only applies to the stream directly before it
+            and that overrides previous settings.
+
+Stream MRL syntax:
+  [[access][/demux]://]URL[@[title][:chapter][-[title][:chapter]]] [:option=value ...]
+
+  Many of the global --options can also be used as MRL specific :options.
+  Multiple :option=value pairs can be specified.
+
+URL syntax:
+  [file://]filename              Plain media file
+  http://ip:port/file            HTTP URL
+  ftp://ip:port/file             FTP URL
+  mms://ip:port/file             MMS URL
+  screen://                      Screen capture
+  [dvd://][device][@raw_device]  DVD device
+  [vcd://][device]               VCD device
+  [cdda://][device]              Audio CD device
+  udp://[[<source address>]@[<bind address>][:<bind port>]]
+                                 UDP stream sent by a streaming server
+  vlc://pause:<seconds>          Special item to pause the playlist for a certain time
+  vlc://quit                     Special item to quit VLC
+
+ Audio
+      --audio, --no-audio        Abilita audio (predefinito abilitato)
+      --volume=<intero [0 .. 1024]>
+                                 Volume predefinito
+      --spdif, --no-spdif        Utilizza S/PDIF quando possibile (predefinito
+                                 disabilitato)
+      --force-dolby-surround={0 (Auto), 1 (Attivo), 2 (Spento)}
+                                 Forza il rilevamento del Dolby Surround
+      --audio-replay-gain-mode={none,track,album}
+                                 Modalità del guadagno di riproduzione
+      --audio-replay-gain-preamp=<virgola mobile>
+                                 Preamplificazione di riproduzione
+      --audio-replay-gain-default=<virgola mobile>
+                                 Guadagno di riproduzione predefinito
+      --audio-filter=<stringa>   Filtri audio
+      --audio-visual=<stringa>   Visualizzazioni audio 
+
+ Video
+  -f, --fullscreen, --no-fullscreen
+                                 Uscita video a schermo intero (predefinito
+                                 disabilitato)
+      --overlay, --no-overlay    Uscita video sovrapposta (overlay)
+                                 (predefinito abilitato)
+      --video-on-top, --no-video-on-top
+                                 Sempre in primo piano (predefinito
+                                 disabilitato)
+      --video-title-show, --no-video-title-show
+                                 Mostra titolo a video (predefinito abilitato)
+      --video-title-timeout=<intero>
+                                 Mostra titolo del video per x millisecondi
+      --video-title-position={0 (Centro), 1 (Sinistra), 2 (Destra), 4 (Alto), 8 (Basso), 5 (In alto a sinistra), 6 (In alto a destra), 9 (In basso a sinistra), 10 (In basso a destra)}
+                                 Posizione del titolo del video
+      --mouse-hide-timeout=<intero>
+                                 Nascondi il cursore e il controllo a schermo
+                                 intero dopo n millisecondi
+   Schermata:
+      --snapshot-path=<stringa>  Cartella delle schermate video (o nome file)
+      --snapshot-prefix=<stringa>
+                                 Prefisso file delle schermate video
+      --snapshot-format={png,jpg}
+                                 Formato delle schermate video
+      --snapshot-preview, --no-snapshot-preview
+                                 Visualizza l'anteprima della schermata video
+                                 (predefinito abilitato)
+      --snapshot-sequential, --no-snapshot-sequential
+                                 Usa numeri sequenziali al posto del formato
+                                 orario (predefinito disabilitato)
+   Proprietà della finestra:
+      --crop=<stringa>           Ritaglio video
+      --custom-crop-ratios=<stringa>
+                                 Custom crop ratios list
+      --aspect-ratio=<stringa>   Formato immagine sorgente
+      --custom-aspect-ratios=<stringa>
+                                 Elenco proporzioni personalizzate
+      --video-filter=<stringa>   Modulo filtro video
+      --vout-filter=<stringa>    Modulo di filtraggio dell'uscita video
+
+ Immagini
+   Messaggi in sovraimpressione (OSD):
+      --osd, --no-osd            Messaggi in sovraimpressione (OSD)
+                                 (predefinito abilitato)
+   Sottotitoli:
+      --sub-file=<stringa>       Usa un file di sottotitoli
+      --sub-autodetect-file, --no-sub-autodetect-file
+                                 Selezione automatica file di sottotitoli
+                                 (predefinito abilitato)
+   Overlays:
+      --sub-filter=<stringa>     Modulo di trattamento d'immagine
+   Impostazioni traccia:
+      --audio-language=<stringa> Lingua dell'audio
+      --sub-language=<stringa>   Lingua dei sottotitoli
+   Controllo di riproduzione:
+      --input-repeat=<intero>    Input repetitions
+   Dispositivi predefiniti:
+      --dvd=<stringa>            Dispositivo DVD
+      --vcd=<stringa>            Dispositivo VCD
+      --cd-audio=<stringa>       Lettore CD audio
+   Impostazioni dei rete:
+      --server-port=<intero>     Porta UDP
+  -6, --ipv6, --no-ipv6          Forza IPv6 (predefinito disabilitato)
+  -4, --ipv4, --no-ipv4          Forza IPv4 (predefinito disabilitato)
+
+ Ingresso
+   Avanzate:
+      --access-filter=<stringa>  Access filter module
+      --prefer-system-codecs, --no-prefer-system-codecs
+                                 Preferisci i plugin di sistema rispetto a
+                                 quelli di VLC (predefinito disabilitato)
+   Opzioni relative alle prestazioni:
+      --high-priority, --no-high-priority
+                                 Aumenta la priorità del processo
+                                 (predefinito disabilitato)
+
+ Playlist
+  -Z, --random, --no-random      Riproduci file casualmente in continuo
+                                 (predefinito disabilitato)
+  -L, --loop, --no-loop          Ripeti tutto (predefinito disabilitato)
+  -R, --repeat, --no-repeat      Ripeti l'elemento attuale (predefinito
+                                 disabilitato)
+      --play-and-exit, --no-play-and-exit
+                                 Riproduci ed esci (predefinito disabilitato)
+      --play-and-stop, --no-play-and-stop
+                                 Play e stop (predefinito disabilitato)
+      --media-library, --no-media-library
+                                 Usa la raccolta multimediale (predefinito
+                                 abilitato)
+      --playlist-tree, --no-playlist-tree
+                                 Visualizza l'albero della playlist
+                                 (predefinito disabilitato)
+      --open=<stringa>           Flusso predefinito
+      --auto-preparse, --no-auto-preparse
+                                 Pre-analisi automatica dei file (predefinito
+                                 abilitato)
+      --album-art={0 (Solo scaricamento manuale), 1 (All'avvio della riproduzione della traccia), 2 (Non appena la traccia viene aggiunta)}
+                                 Criterio delle copertine
+  -S, --services-discovery=<stringa>
+                                 Moduli di rilevamento servizi
+  -v, --verbose=<intero>         Dettaglio messaggi (0,1,2)
+      --language={auto,en,ar,pt_BR,en_GB,bg,ca,zh_TW,cs,da,nl,fi,fr,gl,ka,de,he,hu,it,ja,ko,ms,oc,fa,pl,pt_PT,pa,ro,ru,zh_CN,sr,sk,sl,es,sv,tr,uk}
+                                 Lingua
+      --advanced, --no-advanced  Mostra opzioni avanzate (predefinito
+                                 disabilitato)
+      --interact, --no-interact  Interazione con l'interfaccia (predefinito
+                                 abilitato)
+      --show-intf, --no-show-intf
+                                 Mostra interfaccia con il mouse (predefinito
+                                 disabilitato)
+  -I, --intf=<stringa>           Modulo di interfaccia
+      --extraintf=<stringa>      Moduli d'interfaccia supplementari
+      --control=<stringa>        Interfacce di controllo
+
+ Tasti speciali
+      --key-toggle-fullscreen=<intero>
+                                 Schermo intero
+      --key-leave-fullscreen=<intero>
+                                 Abbandona schermo intero
+      --key-play-pause=<intero>  Play/Pausa
+      --key-faster=<intero>      Più veloce
+      --key-slower=<intero>      Più lento
+      --key-next=<intero>        Successivo
+      --key-prev=<intero>        Precedente
+      --key-stop=<intero>        Interrompi
+      --key-jump-extrashort=<intero>
+                                 Salto molto corto all'indietro
+      --key-jump+extrashort=<intero>
+                                 Salto molto corto in avanti
+      --key-jump-short=<intero>  Salto corto all'indietro
+      --key-jump+short=<intero>  Salto corto in avanti
+      --key-jump-medium=<intero> Salto medio all'indietro
+      --key-jump+medium=<intero> Salto medio in avanti
+      --key-jump-long=<intero>   Salto lungo all'indietro
+      --key-jump+long=<intero>   Salto lungo in avanti
+      --key-quit=<intero>        Esci
+      --key-vol-up=<intero>      Aumenta il volume
+      --key-vol-down=<intero>    Riduci il volume
+      --key-vol-mute=<intero>    Silenzio
+      --key-audio-track=<intero> Scelta traccia audio
+      --key-audiodevice-cycle=<intero>
+                                 Cycle through audio devices
+      --key-subtitle-track=<intero>
+                                 Scelta traccia sottotitoli
+      --key-aspect-ratio=<intero>
+                                 Cycle source aspect ratio
+      --key-crop=<intero>        Cycle video crop
+      --key-deinterlace=<intero> Cycle deinterlace modes
+      --key-wallpaper=<intero>   Toggle wallpaper mode in video output
+      --key-random=<intero>      Casuale
+      --key-loop=<intero>        Normale/Ripeti/Cicla
+   Zoom:
+      --key-zoom-quarter=<intero>
+                                 1:4 Quarto
+      --key-zoom-half=<intero>   1:2 Metà
+      --key-zoom-original=<intero>
+                                 1:1 Originale
+      --key-zoom-double=<intero> 2:1 Doppio
+   Dimensioni salto:
+      --extrashort-jump-size=<intero>
+                                 Lunghezza del salto molto corto
+      --short-jump-size=<intero> Lunghezza del salto corto
+      --medium-jump-size=<intero>
+                                 Lunghezza del salto medio
+      --long-jump-size=<intero>  Lunghezza del salto lungo
+      --bookmark1=<stringa>      Elemento preferito 1
+      --bookmark2=<stringa>      Elemento preferito 2
+      --bookmark3=<stringa>      Elemento preferito 3
+      --bookmark4=<stringa>      Elemento preferito 4
+      --bookmark5=<stringa>      Elemento preferito 5
+      --bookmark6=<stringa>      Elemento preferito 6
+      --bookmark7=<stringa>      Elemento preferito 7
+      --bookmark8=<stringa>      Elemento preferito 8
+      --bookmark9=<stringa>      Elemento preferito 9
+      --bookmark10=<stringa>     Elemento preferito 10
+  -h, --help, --no-help          print help for VLC (can be combined with
+                                 --advanced and --help-verbose) (predefinito
+                                 abilitato)
+  -H, --full-help, --no-full-help
+                                 Guida dettagliata su VLC e i suoi moduli
+                                 (predefinito disabilitato)
+      --longhelp, --no-longhelp  print help for VLC and all its modules (can
+                                 be combined with --advanced and
+                                 --help-verbose) (predefinito disabilitato)
+      --help-verbose, --no-help-verbose
+                                 richiesta di maggiore dettaglio quando si
+                                 visualizza la guida (predefinito disabilitato)
+  -l, --list, --no-list          mostra una lista dei moduli disponibili
+                                 (predefinito disabilitato)
+  -l, --list-verbose, --no-list-verbose
+                                 mostra una lista dei moduli disponibili con
+                                 dettagli aggiuntivi (predefinito disabilitato)
+  -p, --module=<stringa>         mostra la guida di un modulo specifico (può
+                                 essere combinato con --advanced e
+                                 --help-verbose)
+      --ignore-config, --no-ignore-config
+                                 no configuration option will be loaded nor
+                                 saved to config file (predefinito
+                                 disabilitato)
+      --save-config, --no-save-config
+                                 salva le opzioni della linea di comando nel
+                                 file di configurazione (predefinito
+                                 disabilitato)
+      --reset-config, --no-reset-config
+                                 azzera la configurazione corrente e
+                                 ripristina i valori di default (predefinito
+                                 disabilitato)
+      --reset-plugins-cache, --no-reset-plugins-cache
+                                 azzera la memoria dei plugin (predefinito
+                                 disabilitato)
+      --version, --no-version    mostra informazioni sulla versione
+                                 (predefinito disabilitato)
+      --config=<stringa>         usa un altro file di configurazione
+      --version, --no-version    mostra informazioni sulla versione
+                                 (predefinito disabilitato)
+
+ Nota: aggiungi --advanced alla riga di comando per vedere le opzioni avanzate.
+
+Per ottenere un aiuto dettagliato, utilizza '-H'.

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>586</width>
+    <height>642</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sacks</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="media.qrc">
+    <normaloff>:/new/prefix2/images/actions/kontact_contacts.png</normaloff>:/new/prefix2/images/actions/kontact_contacts.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>586</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionDelete"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuWindows">
+    <property name="title">
+     <string>&amp;Windows</string>
+    </property>
+    <addaction name="actionTile"/>
+    <addaction name="actionCascade"/>
+   </widget>
+   <widget class="QMenu" name="menuAction">
+    <property name="title">
+     <string>Actio&amp;n</string>
+    </property>
+    <addaction name="actionConnection"/>
+    <addaction name="actionSendVideo"/>
+    <addaction name="actionSendDesktop"/>
+    <addaction name="actionVideoStream"/>
+    <addaction name="actionFocusRequest"/>
+    <addaction name="separator"/>
+    <addaction name="actionConfigure"/>
+    <addaction name="actionShowDockPanels"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menuWindows"/>
+   <addaction name="menuAction"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionDelete"/>
+   <addaction name="actionExit"/>
+   <addaction name="separator"/>
+   <addaction name="actionTile"/>
+   <addaction name="actionCascade"/>
+   <addaction name="separator"/>
+   <addaction name="actionConnection"/>
+   <addaction name="actionSendVideo"/>
+   <addaction name="actionSendDesktop"/>
+   <addaction name="actionVideoStream"/>
+   <addaction name="actionFocusRequest"/>
+   <addaction name="separator"/>
+   <addaction name="actionConfigure"/>
+   <addaction name="actionShowDockPanels"/>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetRoom">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="features">
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="windowTitle">
+    <string>&amp;Group</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgeRoomContents">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineEditRoomMsg">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelLinkToServer">
+         <property name="minimumSize">
+          <size>
+           <width>17</width>
+           <height>17</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>17</width>
+           <height>17</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listWidgetRoomBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="autoScroll">
+        <bool>false</bool>
+       </property>
+       <property name="flow">
+        <enum>QListView::TopToBottom</enum>
+       </property>
+       <property name="isWrapping" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="layoutMode">
+        <enum>QListView::SinglePass</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetMediaFocus">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="windowTitle">
+    <string>On Focus:</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetFocusContents">
+    <layout class="QVBoxLayout" name="verticalLayoutFocus">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetUser">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="features">
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="windowTitle">
+    <string>&amp;Utenti</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetUserContents">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QToolBox" name="toolBox">
+       <property name="minimumSize">
+        <size>
+         <width>260</width>
+         <height>240</height>
+        </size>
+       </property>
+       <property name="currentIndex">
+        <number>-1</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetVoip">
+   <property name="windowTitle">
+    <string>&amp;Voip</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetVoipContents">
+    <layout class="QVBoxLayout" name="layoutVoip">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+    </layout>
+   </widget>
+  </widget>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix1/images/filequit.png</normaloff>:/new/prefix1/images/filequit.png</iconset>
+   </property>
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix1/images/editadd.png</normaloff>:/new/prefix1/images/editadd.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="autoRepeat">
+    <bool>true</bool>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="actionTile">
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix2/images/actions/view_left_right.png</normaloff>:/new/prefix2/images/actions/view_left_right.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Tile</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix1/images/editdelete.png</normaloff>:/new/prefix1/images/editdelete.png</iconset>
+   </property>
+   <property name="text">
+    <string>delete</string>
+   </property>
+  </action>
+  <action name="actionCascade">
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix1/images/icon.png</normaloff>:/new/prefix1/images/icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cascade</string>
+   </property>
+  </action>
+  <action name="actionSendVideo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix2/images/actions/webcamsend.png</normaloff>:/new/prefix2/images/actions/webcamsend.png</iconset>
+   </property>
+   <property name="text">
+    <string>SendVideo</string>
+   </property>
+  </action>
+  <action name="actionVideoStream">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix1/images/devices/tv.png</normaloff>:/new/prefix1/images/devices/tv.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Video Stream</string>
+   </property>
+  </action>
+  <action name="actionConnection">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix2/images/actions/connect_no.png</normaloff>
+     <normalon>:/new/prefix2/images/actions/connect_creating.png</normalon>:/new/prefix2/images/actions/connect_no.png</iconset>
+   </property>
+   <property name="text">
+    <string>Connection</string>
+   </property>
+  </action>
+  <action name="actionSendDesktop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix1/images/filesystems/network_local.png</normaloff>:/new/prefix1/images/filesystems/network_local.png</iconset>
+   </property>
+   <property name="text">
+    <string>sendDesktop</string>
+   </property>
+  </action>
+  <action name="actionConfigure">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix2/images/actions/configure.png</normaloff>:/new/prefix2/images/actions/configure.png</iconset>
+   </property>
+   <property name="text">
+    <string>Configure</string>
+   </property>
+  </action>
+  <action name="actionShowDockPanels">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix2/images/actions/show_side_panel.png</normaloff>:/new/prefix2/images/actions/show_side_panel.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Dock Panels</string>
+   </property>
+   <property name="toolTip">
+    <string>Show side panel</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
+  </action>
+  <action name="actionFocusRequest">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/images/actions/token.png</normaloff>:/new/prefix1/images/actions/token.png</iconset>
+   </property>
+   <property name="text">
+    <string>Focus Request</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="media.qrc">
+     <normaloff>:/new/prefix2/images/actions/messagebox_info.png</normaloff>:/new/prefix2/images/actions/messagebox_info.png</iconset>
+   </property>
+   <property name="text">
+    <string>About Sacks</string>
+   </property>
+   <property name="toolTip">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="media.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>222</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShowDockPanels</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockWidgetRoom</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>448</x>
+     <y>152</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShowDockPanels</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockWidgetUser</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>448</x>
+     <y>434</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShowDockPanels</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockWidgetVoip</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>448</x>
+     <y>596</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShowDockPanels</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>dockWidgetMediaFocus</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>448</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

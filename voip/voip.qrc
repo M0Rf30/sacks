@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="voip" >
+    <file>../interface/images/voip/messagebox_info.png</file>
+    <file>../interface/images/voip/configure_voip.png</file>
+    <file>../interface/images/voip/internet-telephony_online.png</file>
+    <file>../interface/images/voip/internet-telephony_notOnline.png</file>
+    <file>../interface/images/voip/internet-telephony_connecting.png</file>
+    <file>../interface/images/voip/call-stop.png</file>
+    <file>../interface/images/voip/call-start.png</file>
+  </qresource>
+</RCC>

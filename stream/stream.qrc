@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="stream" >
+    <file>../interface/images/voip/call-start.png</file>
+    <file>../interface/images/apps/desktop-mdk.png</file>
+    <file>../interface/images/actions/search_user.png</file>
+    <file>../interface/images/actions/kimproxyoffline.png</file>
+    <file>../interface/images/actions/kimproxyonline.png</file>
+    <file>../interface/images/actions/user_disabled.png</file>
+    <file>../interface/images/actions/user.png</file>
+    <file>../interface/images/actions/edit_user.png</file>
+    <file>../interface/images/apps/kcmsound.png</file>
+    <file>../interface/images/devices/tv.png</file>
+    <file>../interface/images/actions/attach.png</file>
+    <file>../interface/images/apps/package_multimedia.png</file>
+    <file>../interface/images/actions/connect_no.png</file>
+  </qresource>
+</RCC>
