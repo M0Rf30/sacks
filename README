@@ -1,3 +1,3 @@
  
 
-Requirements: depends=('libvncserver' 'python' 'pyqt' 'vlc' 'python-dnspython' 'fakeroot' 'openssl' 'python2-pjproject' 'pyvnc') 
+Requirements: depends=('libvncserver' 'python' 'pyqt' 'vlc' 'python-dnspython' 'fakeroot' 'openssl' 'python2-pjproject' 'pyvnc' 'xmpppy') 
