@@ -441,6 +441,7 @@ class Ui_VoipInterface(object):
         self.actionHangup.setText(QtGui.QApplication.translate("VoipInterface", "Hangup", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setText(QtGui.QApplication.translate("VoipInterface", "About", None, QtGui.QApplication.UnicodeUTF8))
 
+import voip_rc
 
 if __name__ == "__main__":
     import sys

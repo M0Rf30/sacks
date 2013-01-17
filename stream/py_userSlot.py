@@ -30,6 +30,7 @@ The class is "pyuserSlot" that import a gui interface that represent status info
 import sys
 from PyQt4 import QtCore, QtGui
 from Ui_user import Ui_User
+import stream_rc
 # sys.path.append('stream')
 from py_stream import pystream
 # 	QWidget al posto di QMainWindow

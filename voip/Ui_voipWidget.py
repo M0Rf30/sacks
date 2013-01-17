@@ -88,6 +88,8 @@ class Ui_voipWidget(object):
         self.labelSipAccountPasswd.setText(QtGui.QApplication.translate("voipWidget", "Sip Password", None, QtGui.QApplication.UnicodeUTF8))
         self.labelSipStunServer.setText(QtGui.QApplication.translate("voipWidget", "Stun Server", None, QtGui.QApplication.UnicodeUTF8))
 
+import voip_rc
+
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)

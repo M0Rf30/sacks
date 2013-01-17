@@ -123,6 +123,8 @@ class Ui_webForm(object):
 
 from PyQt4 import QtWebKit
 
+import web_rc
+
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
