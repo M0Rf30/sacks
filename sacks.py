@@ -37,7 +37,7 @@ from stream.py_stream import pystream
 from stream.py_streamDialog import pystreamDialog
 from py_userBox import pyuserBox
 from jabber.Ui_xmppDialog import Ui_xmppDialog
-# from py_elabCommand import pyelabCommand
+from translations import translations_rc
 from voip.py_voipInterface import pyvoipInterface
 class pyriunioni(QtGui.QMainWindow):
 
