@@ -22,12 +22,12 @@ import sys
 import pjsua as pj
 import threading
 
-LOG_LEVEL=3
+LOG_LEVEL = 3
 current_call = None
 
 # Logging callback
-def log_cb(level, str, len):
-    print str,
+def log_cb(level, string, lenght):
+    print string,
 
 
 # Callback to receive events from account
@@ -54,11 +54,11 @@ class MyAccountCallback(pj.AccountCallback):
         self.sem = threading.Semaphore(0)
         self.sem.acquire()
 
-	def on_reg_state(self):
-		print "Registration complete, status=", self.account.info().reg_status, "(" + self.account.info().reg_reason + ")"
-		if self.sem:
-			if self.account.info().reg_status >= 200:
-				self.sem.release()
+    def on_reg_state(self):
+        print "Registration complete, status=", self.account.info().reg_status, "(" + self.account.info().reg_reason + ")"
+        if self.sem:
+            if self.account.info().reg_status >= 200:
+                self.sem.release()
 
 
 
@@ -76,7 +76,7 @@ class MyCallCallback(pj.CallCallback):
         global current_call
         print "Call with", self.call.info().remote_uri,
         print "is", self.call.info().state_text,
-        print "last code =", self.call.info().last_code, 
+        print "last code =", self.call.info().last_code,
         print "(" + self.call.info().last_reason + ")"
         
         if self.call.info().state == pj.CallState.DISCONNECTED:
@@ -110,12 +110,12 @@ lib = pj.Lib()
 try:
     # Init library with default config and some customized
     # logging config.
-    lib.init(log_cfg = pj.LogConfig(level=LOG_LEVEL, callback=log_cb))
+    lib.init(log_cfg=pj.LogConfig(level=LOG_LEVEL, callback=log_cb))
 
     # Create UDP transport which listens to any available port
-    transport = lib.create_transport(pj.TransportType.UDP, 
+    transport = lib.create_transport(pj.TransportType.UDP,
                                      pj.TransportConfig(5060))
-    print "\nListening on", transport.info().host, 
+    print "\nListening on", transport.info().host,
     print "port", transport.info().port, "\n"
     
     accountParameters = pj.AccountConfig("voip.eutelia.it", "08231761061", "g3n3r1c0")
@@ -142,26 +142,26 @@ try:
         print "My SIP URI is", my_sip_uri
         print "Menu:  m=make call, h=hangup call, a=answer call, q=quit"
 
-        input = sys.stdin.readline().rstrip("\r\n")
-        if input == "m":
+        userinput = sys.stdin.readline().rstrip("\r\n")
+        if userinput == "m":
             if current_call:
                 print "Already have another call"
                 continue
-            print "Enter destination URI to call: ", 
-            input = sys.stdin.readline().rstrip("\r\n")
-            if input == "":
+            print "Enter destination URI to call: ",
+            userinput = sys.stdin.readline().rstrip("\r\n")
+            if userinput == "":
                 continue
             lck = lib.auto_lock()
             current_call = make_call(input)
             del lck
 
-        elif input == "h":
+        elif userinput == "h":
             if not current_call:
                 print "There is no call"
                 continue
             current_call.hangup()
 
-        elif input == "a":
+        elif userinput == "a":
             if not current_call:
                 print "There is no call"
                 continue

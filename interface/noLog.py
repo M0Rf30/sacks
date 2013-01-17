@@ -20,11 +20,11 @@
 #
 
 
-#per la versione compilata con py2exe al fine di evitare file di log in una versione windows
+# per la versione compilata con py2exe al fine di evitare file di log in una versione windows
 import sys
-if hasattr(sys,"frozen"):  # true only if we are running as a py2exe app
+if hasattr(sys, "frozen"):  # true only if we are running as a py2exe app
 	class Blackhole(object):
-		def write(self,text):
+		def write(self, text):
 			pass
 		def flush(self):
 			pass

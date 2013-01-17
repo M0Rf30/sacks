@@ -57,8 +57,6 @@ class Ui_VncInterface(object):
         self.toolBar.setWindowTitle(QtGui.QApplication.translate("VncInterface", "RemoteScreen ToolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConnectScreen.setText(QtGui.QApplication.translate("VncInterface", "Connect Screen", None, QtGui.QApplication.UnicodeUTF8))
 
-import vnc_rc
-
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)

@@ -39,7 +39,7 @@ class Ui_xmppDialog(object):
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(xmppDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel | QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
 

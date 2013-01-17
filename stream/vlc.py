@@ -48,7 +48,7 @@ import sys
 from inspect import getargspec
 
 __version__ = "N/A"
-build_date  = "Mon Oct 15 20:54:00 2012"
+build_date = "Mon Oct 15 20:54:00 2012"
 
 if sys.version_info[0] > 2:
     str = str
@@ -122,7 +122,7 @@ def find_lib():
             if plugin_path is None:
                  # try some standard locations.
                 for p in ('Program Files\\VideoLan\\', 'VideoLan\\',
-                          'Program Files\\',           ''):
+                          'Program Files\\', ''):
                     p = 'C:\\' + p + 'VLC\\libvlc.dll'
                     if os.path.exists(p):
                         plugin_path = os.path.dirname(p)
@@ -158,7 +158,7 @@ def find_lib():
     return (dll, plugin_path)
 
 # plugin_path used on win32 and MacOS in override.py
-dll, plugin_path  = find_lib()
+dll, plugin_path = find_lib()
 
 class VLCException(Exception):
     """Exception raised by libvlc methods.
@@ -168,7 +168,7 @@ class VLCException(Exception):
 try:
     _Ints = (int, long)
 except NameError:  # no long in Python 3+
-    _Ints =  int
+    _Ints = int
 _Seqs = (list, tuple)
 
 # Default instance. It is used to instanciate classes directly in the
@@ -324,8 +324,8 @@ class _Enum(ctypes.c_uint):
         return '.'.join((self.__class__.__module__, self.__str__()))
 
     def __eq__(self, other):
-        return ( (isinstance(other, _Enum) and self.value == other.value)
-              or (isinstance(other, _Ints) and self.value == other) )
+        return ((isinstance(other, _Enum) and self.value == other.value)
+              or (isinstance(other, _Ints) and self.value == other))
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -340,9 +340,9 @@ class LogLevel(_Enum):
         3: 'WARNING',
         4: 'ERROR',
     }
-LogLevel.DEBUG   = LogLevel(0)
-LogLevel.ERROR   = LogLevel(4)
-LogLevel.NOTICE  = LogLevel(2)
+LogLevel.DEBUG = LogLevel(0)
+LogLevel.ERROR = LogLevel(4)
+LogLevel.NOTICE = LogLevel(2)
 LogLevel.WARNING = LogLevel(3)
 
 class EventType(_Enum):
@@ -399,55 +399,55 @@ class EventType(_Enum):
         1545: 'VlmMediaInstanceStatusEnd',
         1546: 'VlmMediaInstanceStatusError',
     }
-EventType.MediaDiscovererEnded          = EventType(1281)
-EventType.MediaDiscovererStarted        = EventType(0x500)
-EventType.MediaDurationChanged          = EventType(2)
-EventType.MediaFreed                    = EventType(4)
-EventType.MediaListItemAdded            = EventType(0x200)
-EventType.MediaListItemDeleted          = EventType(514)
-EventType.MediaListPlayerNextItemSet    = EventType(1025)
-EventType.MediaListPlayerPlayed         = EventType(0x400)
-EventType.MediaListPlayerStopped        = EventType(1026)
-EventType.MediaListViewItemAdded        = EventType(0x300)
-EventType.MediaListViewItemDeleted      = EventType(770)
-EventType.MediaListViewWillAddItem      = EventType(769)
-EventType.MediaListViewWillDeleteItem   = EventType(771)
-EventType.MediaListWillAddItem          = EventType(513)
-EventType.MediaListWillDeleteItem       = EventType(515)
-EventType.MediaMetaChanged              = EventType(0)
-EventType.MediaParsedChanged            = EventType(3)
-EventType.MediaPlayerBackward           = EventType(264)
-EventType.MediaPlayerBuffering          = EventType(259)
-EventType.MediaPlayerEncounteredError   = EventType(266)
-EventType.MediaPlayerEndReached         = EventType(265)
-EventType.MediaPlayerForward            = EventType(263)
-EventType.MediaPlayerLengthChanged      = EventType(273)
-EventType.MediaPlayerMediaChanged       = EventType(0x100)
-EventType.MediaPlayerNothingSpecial     = EventType(257)
-EventType.MediaPlayerOpening            = EventType(258)
-EventType.MediaPlayerPausableChanged    = EventType(270)
-EventType.MediaPlayerPaused             = EventType(261)
-EventType.MediaPlayerPlaying            = EventType(260)
-EventType.MediaPlayerPositionChanged    = EventType(268)
-EventType.MediaPlayerSeekableChanged    = EventType(269)
-EventType.MediaPlayerSnapshotTaken      = EventType(272)
-EventType.MediaPlayerStopped            = EventType(262)
-EventType.MediaPlayerTimeChanged        = EventType(267)
-EventType.MediaPlayerTitleChanged       = EventType(271)
-EventType.MediaPlayerVout               = EventType(274)
-EventType.MediaStateChanged             = EventType(5)
-EventType.MediaSubItemAdded             = EventType(1)
-EventType.VlmMediaAdded                 = EventType(0x600)
-EventType.VlmMediaChanged               = EventType(1538)
-EventType.VlmMediaInstanceStarted       = EventType(1539)
-EventType.VlmMediaInstanceStatusEnd     = EventType(1545)
-EventType.VlmMediaInstanceStatusError   = EventType(1546)
-EventType.VlmMediaInstanceStatusInit    = EventType(1541)
+EventType.MediaDiscovererEnded = EventType(1281)
+EventType.MediaDiscovererStarted = EventType(0x500)
+EventType.MediaDurationChanged = EventType(2)
+EventType.MediaFreed = EventType(4)
+EventType.MediaListItemAdded = EventType(0x200)
+EventType.MediaListItemDeleted = EventType(514)
+EventType.MediaListPlayerNextItemSet = EventType(1025)
+EventType.MediaListPlayerPlayed = EventType(0x400)
+EventType.MediaListPlayerStopped = EventType(1026)
+EventType.MediaListViewItemAdded = EventType(0x300)
+EventType.MediaListViewItemDeleted = EventType(770)
+EventType.MediaListViewWillAddItem = EventType(769)
+EventType.MediaListViewWillDeleteItem = EventType(771)
+EventType.MediaListWillAddItem = EventType(513)
+EventType.MediaListWillDeleteItem = EventType(515)
+EventType.MediaMetaChanged = EventType(0)
+EventType.MediaParsedChanged = EventType(3)
+EventType.MediaPlayerBackward = EventType(264)
+EventType.MediaPlayerBuffering = EventType(259)
+EventType.MediaPlayerEncounteredError = EventType(266)
+EventType.MediaPlayerEndReached = EventType(265)
+EventType.MediaPlayerForward = EventType(263)
+EventType.MediaPlayerLengthChanged = EventType(273)
+EventType.MediaPlayerMediaChanged = EventType(0x100)
+EventType.MediaPlayerNothingSpecial = EventType(257)
+EventType.MediaPlayerOpening = EventType(258)
+EventType.MediaPlayerPausableChanged = EventType(270)
+EventType.MediaPlayerPaused = EventType(261)
+EventType.MediaPlayerPlaying = EventType(260)
+EventType.MediaPlayerPositionChanged = EventType(268)
+EventType.MediaPlayerSeekableChanged = EventType(269)
+EventType.MediaPlayerSnapshotTaken = EventType(272)
+EventType.MediaPlayerStopped = EventType(262)
+EventType.MediaPlayerTimeChanged = EventType(267)
+EventType.MediaPlayerTitleChanged = EventType(271)
+EventType.MediaPlayerVout = EventType(274)
+EventType.MediaStateChanged = EventType(5)
+EventType.MediaSubItemAdded = EventType(1)
+EventType.VlmMediaAdded = EventType(0x600)
+EventType.VlmMediaChanged = EventType(1538)
+EventType.VlmMediaInstanceStarted = EventType(1539)
+EventType.VlmMediaInstanceStatusEnd = EventType(1545)
+EventType.VlmMediaInstanceStatusError = EventType(1546)
+EventType.VlmMediaInstanceStatusInit = EventType(1541)
 EventType.VlmMediaInstanceStatusOpening = EventType(1542)
-EventType.VlmMediaInstanceStatusPause   = EventType(1544)
+EventType.VlmMediaInstanceStatusPause = EventType(1544)
 EventType.VlmMediaInstanceStatusPlaying = EventType(1543)
-EventType.VlmMediaInstanceStopped       = EventType(1540)
-EventType.VlmMediaRemoved               = EventType(1537)
+EventType.VlmMediaInstanceStopped = EventType(1540)
+EventType.VlmMediaRemoved = EventType(1537)
 
 class Meta(_Enum):
     '''Meta data types.
@@ -471,23 +471,23 @@ class Meta(_Enum):
         15: 'ArtworkURL',
         16: 'TrackID',
     }
-Meta.Album       = Meta(4)
-Meta.Artist      = Meta(1)
-Meta.ArtworkURL  = Meta(15)
-Meta.Copyright   = Meta(3)
-Meta.Date        = Meta(8)
+Meta.Album = Meta(4)
+Meta.Artist = Meta(1)
+Meta.ArtworkURL = Meta(15)
+Meta.Copyright = Meta(3)
+Meta.Date = Meta(8)
 Meta.Description = Meta(6)
-Meta.EncodedBy   = Meta(14)
-Meta.Genre       = Meta(2)
-Meta.Language    = Meta(11)
-Meta.NowPlaying  = Meta(12)
-Meta.Publisher   = Meta(13)
-Meta.Rating      = Meta(7)
-Meta.Setting     = Meta(9)
-Meta.Title       = Meta(0)
-Meta.TrackID     = Meta(16)
+Meta.EncodedBy = Meta(14)
+Meta.Genre = Meta(2)
+Meta.Language = Meta(11)
+Meta.NowPlaying = Meta(12)
+Meta.Publisher = Meta(13)
+Meta.Rating = Meta(7)
+Meta.Setting = Meta(9)
+Meta.Title = Meta(0)
+Meta.TrackID = Meta(16)
 Meta.TrackNumber = Meta(5)
-Meta.URL         = Meta(10)
+Meta.URL = Meta(10)
 
 class State(_Enum):
     '''Note the order of libvlc_state_t enum must match exactly the order of
@@ -507,28 +507,28 @@ stopping=5, ended=6, error=7.
         6: 'Ended',
         7: 'Error',
     }
-State.Buffering      = State(2)
-State.Ended          = State(6)
-State.Error          = State(7)
+State.Buffering = State(2)
+State.Ended = State(6)
+State.Error = State(7)
 State.NothingSpecial = State(0)
-State.Opening        = State(1)
-State.Paused         = State(4)
-State.Playing        = State(3)
-State.Stopped        = State(5)
+State.Opening = State(1)
+State.Paused = State(4)
+State.Playing = State(3)
+State.Stopped = State(5)
 
 class TrackType(_Enum):
     '''N/A
     '''
     _enum_names_ = {
-        -1: 'unknown',
+        - 1: 'unknown',
         0: 'audio',
         1: 'video',
         2: 'text',
     }
-TrackType.audio   = TrackType(0)
-TrackType.text    = TrackType(2)
+TrackType.audio = TrackType(0)
+TrackType.text = TrackType(2)
 TrackType.unknown = TrackType(-1)
-TrackType.video   = TrackType(1)
+TrackType.video = TrackType(1)
 
 class PlaybackMode(_Enum):
     '''Defines playback modes for playlist.
@@ -539,8 +539,8 @@ class PlaybackMode(_Enum):
         2: 'repeat',
     }
 PlaybackMode.default = PlaybackMode(0)
-PlaybackMode.loop    = PlaybackMode(1)
-PlaybackMode.repeat  = PlaybackMode(2)
+PlaybackMode.loop = PlaybackMode(1)
+PlaybackMode.repeat = PlaybackMode(2)
 
 class VideoMarqueeOption(_Enum):
     '''Marq options definition.
@@ -557,14 +557,14 @@ class VideoMarqueeOption(_Enum):
         8: 'marquee_X',
         9: 'marquee_Y',
     }
-VideoMarqueeOption.Color     = VideoMarqueeOption(2)
-VideoMarqueeOption.Enable    = VideoMarqueeOption(0)
-VideoMarqueeOption.Opacity   = VideoMarqueeOption(3)
-VideoMarqueeOption.Position  = VideoMarqueeOption(4)
-VideoMarqueeOption.Refresh   = VideoMarqueeOption(5)
-VideoMarqueeOption.Size      = VideoMarqueeOption(6)
-VideoMarqueeOption.Text      = VideoMarqueeOption(1)
-VideoMarqueeOption.Timeout   = VideoMarqueeOption(7)
+VideoMarqueeOption.Color = VideoMarqueeOption(2)
+VideoMarqueeOption.Enable = VideoMarqueeOption(0)
+VideoMarqueeOption.Opacity = VideoMarqueeOption(3)
+VideoMarqueeOption.Position = VideoMarqueeOption(4)
+VideoMarqueeOption.Refresh = VideoMarqueeOption(5)
+VideoMarqueeOption.Size = VideoMarqueeOption(6)
+VideoMarqueeOption.Text = VideoMarqueeOption(1)
+VideoMarqueeOption.Timeout = VideoMarqueeOption(7)
 VideoMarqueeOption.marquee_X = VideoMarqueeOption(8)
 VideoMarqueeOption.marquee_Y = VideoMarqueeOption(9)
 
@@ -579,10 +579,10 @@ class NavigateMode(_Enum):
         4: 'right',
     }
 NavigateMode.activate = NavigateMode(0)
-NavigateMode.down     = NavigateMode(2)
-NavigateMode.left     = NavigateMode(3)
-NavigateMode.right    = NavigateMode(4)
-NavigateMode.up       = NavigateMode(1)
+NavigateMode.down = NavigateMode(2)
+NavigateMode.left = NavigateMode(3)
+NavigateMode.right = NavigateMode(4)
+NavigateMode.up = NavigateMode(1)
 
 class VideoLogoOption(_Enum):
     '''Option values for libvlc_video_{get,set}_logo_{int,string}.
@@ -597,14 +597,14 @@ class VideoLogoOption(_Enum):
         6: 'opacity',
         7: 'position',
     }
-VideoLogoOption.delay    = VideoLogoOption(4)
-VideoLogoOption.enable   = VideoLogoOption(0)
-VideoLogoOption.file     = VideoLogoOption(1)
-VideoLogoOption.logo_x   = VideoLogoOption(2)
-VideoLogoOption.logo_y   = VideoLogoOption(3)
-VideoLogoOption.opacity  = VideoLogoOption(6)
+VideoLogoOption.delay = VideoLogoOption(4)
+VideoLogoOption.enable = VideoLogoOption(0)
+VideoLogoOption.file = VideoLogoOption(1)
+VideoLogoOption.logo_x = VideoLogoOption(2)
+VideoLogoOption.logo_y = VideoLogoOption(3)
+VideoLogoOption.opacity = VideoLogoOption(6)
 VideoLogoOption.position = VideoLogoOption(7)
-VideoLogoOption.repeat   = VideoLogoOption(5)
+VideoLogoOption.repeat = VideoLogoOption(5)
 
 class VideoAdjustOption(_Enum):
     '''Option values for libvlc_video_{get,set}_adjust_{int,float,bool}.
@@ -618,17 +618,17 @@ class VideoAdjustOption(_Enum):
         5: 'Gamma',
     }
 VideoAdjustOption.Brightness = VideoAdjustOption(2)
-VideoAdjustOption.Contrast   = VideoAdjustOption(1)
-VideoAdjustOption.Enable     = VideoAdjustOption(0)
-VideoAdjustOption.Gamma      = VideoAdjustOption(5)
-VideoAdjustOption.Hue        = VideoAdjustOption(3)
+VideoAdjustOption.Contrast = VideoAdjustOption(1)
+VideoAdjustOption.Enable = VideoAdjustOption(0)
+VideoAdjustOption.Gamma = VideoAdjustOption(5)
+VideoAdjustOption.Hue = VideoAdjustOption(3)
 VideoAdjustOption.Saturation = VideoAdjustOption(4)
 
 class AudioOutputDeviceTypes(_Enum):
     '''Audio device types.
     '''
     _enum_names_ = {
-        -1: 'Error',
+        - 1: 'Error',
         1: 'Mono',
         2: 'Stereo',
         4: '_2F2R',
@@ -638,33 +638,33 @@ class AudioOutputDeviceTypes(_Enum):
         8: '_7_1',
         10: 'SPDIF',
     }
-AudioOutputDeviceTypes.Error  = AudioOutputDeviceTypes(-1)
-AudioOutputDeviceTypes.Mono   = AudioOutputDeviceTypes(1)
-AudioOutputDeviceTypes.SPDIF  = AudioOutputDeviceTypes(10)
+AudioOutputDeviceTypes.Error = AudioOutputDeviceTypes(-1)
+AudioOutputDeviceTypes.Mono = AudioOutputDeviceTypes(1)
+AudioOutputDeviceTypes.SPDIF = AudioOutputDeviceTypes(10)
 AudioOutputDeviceTypes.Stereo = AudioOutputDeviceTypes(2)
-AudioOutputDeviceTypes._2F2R  = AudioOutputDeviceTypes(4)
-AudioOutputDeviceTypes._3F2R  = AudioOutputDeviceTypes(5)
-AudioOutputDeviceTypes._5_1   = AudioOutputDeviceTypes(6)
-AudioOutputDeviceTypes._6_1   = AudioOutputDeviceTypes(7)
-AudioOutputDeviceTypes._7_1   = AudioOutputDeviceTypes(8)
+AudioOutputDeviceTypes._2F2R = AudioOutputDeviceTypes(4)
+AudioOutputDeviceTypes._3F2R = AudioOutputDeviceTypes(5)
+AudioOutputDeviceTypes._5_1 = AudioOutputDeviceTypes(6)
+AudioOutputDeviceTypes._6_1 = AudioOutputDeviceTypes(7)
+AudioOutputDeviceTypes._7_1 = AudioOutputDeviceTypes(8)
 
 class AudioOutputChannel(_Enum):
     '''Audio channels.
     '''
     _enum_names_ = {
-        -1: 'Error',
+        - 1: 'Error',
         1: 'Stereo',
         2: 'RStereo',
         3: 'Left',
         4: 'Right',
         5: 'Dolbys',
     }
-AudioOutputChannel.Dolbys  = AudioOutputChannel(5)
-AudioOutputChannel.Error   = AudioOutputChannel(-1)
-AudioOutputChannel.Left    = AudioOutputChannel(3)
+AudioOutputChannel.Dolbys = AudioOutputChannel(5)
+AudioOutputChannel.Error = AudioOutputChannel(-1)
+AudioOutputChannel.Left = AudioOutputChannel(3)
 AudioOutputChannel.RStereo = AudioOutputChannel(2)
-AudioOutputChannel.Right   = AudioOutputChannel(4)
-AudioOutputChannel.Stereo  = AudioOutputChannel(1)
+AudioOutputChannel.Right = AudioOutputChannel(4)
+AudioOutputChannel.Stereo = AudioOutputChannel(1)
 
 class Callback(ctypes.c_void_p):
     """Callback function notification
@@ -942,19 +942,19 @@ class AudioOutput(_Cstruct):
         return '%s(%s:%s)' % (self.__class__.__name__, self.name, self.description)
 
 AudioOutput._fields_ = [  # recursive struct
-    ('name',        ctypes.c_char_p),
+    ('name', ctypes.c_char_p),
     ('description', ctypes.c_char_p),
-    ('next',        ctypes.POINTER(AudioOutput)),
+    ('next', ctypes.POINTER(AudioOutput)),
     ]
 
 class LogMessage(_Cstruct):
     _fields_ = [
-        ('size',     ctypes.c_uint  ),
-        ('severity', ctypes.c_int   ),
-        ('type',     ctypes.c_char_p),
-        ('name',     ctypes.c_char_p),
-        ('header',   ctypes.c_char_p),
-        ('message',  ctypes.c_char_p),
+        ('size', ctypes.c_uint),
+        ('severity', ctypes.c_int),
+        ('type', ctypes.c_char_p),
+        ('name', ctypes.c_char_p),
+        ('header', ctypes.c_char_p),
+        ('message', ctypes.c_char_p),
     ]
 
     def __init__(self):
@@ -966,44 +966,44 @@ class LogMessage(_Cstruct):
 
 class MediaEvent(_Cstruct):
     _fields_ = [
-        ('media_name',    ctypes.c_char_p),
+        ('media_name', ctypes.c_char_p),
         ('instance_name', ctypes.c_char_p),
     ]
 
 class MediaStats(_Cstruct):
     _fields_ = [
-        ('read_bytes',          ctypes.c_int  ),
-        ('input_bitrate',       ctypes.c_float),
-        ('demux_read_bytes',    ctypes.c_int  ),
-        ('demux_bitrate',       ctypes.c_float),
-        ('demux_corrupted',     ctypes.c_int  ),
-        ('demux_discontinuity', ctypes.c_int  ),
-        ('decoded_video',       ctypes.c_int  ),
-        ('decoded_audio',       ctypes.c_int  ),
-        ('displayed_pictures',  ctypes.c_int  ),
-        ('lost_pictures',       ctypes.c_int  ),
-        ('played_abuffers',     ctypes.c_int  ),
-        ('lost_abuffers',       ctypes.c_int  ),
-        ('sent_packets',        ctypes.c_int  ),
-        ('sent_bytes',          ctypes.c_int  ),
-        ('send_bitrate',        ctypes.c_float),
+        ('read_bytes', ctypes.c_int),
+        ('input_bitrate', ctypes.c_float),
+        ('demux_read_bytes', ctypes.c_int),
+        ('demux_bitrate', ctypes.c_float),
+        ('demux_corrupted', ctypes.c_int),
+        ('demux_discontinuity', ctypes.c_int),
+        ('decoded_video', ctypes.c_int),
+        ('decoded_audio', ctypes.c_int),
+        ('displayed_pictures', ctypes.c_int),
+        ('lost_pictures', ctypes.c_int),
+        ('played_abuffers', ctypes.c_int),
+        ('lost_abuffers', ctypes.c_int),
+        ('sent_packets', ctypes.c_int),
+        ('sent_bytes', ctypes.c_int),
+        ('send_bitrate', ctypes.c_float),
     ]
 
 class MediaTrackInfo(_Cstruct):
     _fields_ = [
-        ('codec',              ctypes.c_uint32),
-        ('id',                 ctypes.c_int   ),
-        ('type',               TrackType      ),
-        ('profile',            ctypes.c_int   ),
-        ('level',              ctypes.c_int   ),
-        ('channels_or_height', ctypes.c_uint  ),
-        ('rate_or_width',      ctypes.c_uint  ),
+        ('codec', ctypes.c_uint32),
+        ('id', ctypes.c_int),
+        ('type', TrackType),
+        ('profile', ctypes.c_int),
+        ('level', ctypes.c_int),
+        ('channels_or_height', ctypes.c_uint),
+        ('rate_or_width', ctypes.c_uint),
     ]
 
 class PlaylistItem(_Cstruct):
     _fields_ = [
-        ('id',   ctypes.c_int   ),
-        ('uri',  ctypes.c_char_p),
+        ('id', ctypes.c_int),
+        ('uri', ctypes.c_char_p),
         ('name', ctypes.c_char_p),
     ]
 
@@ -1015,30 +1015,30 @@ class Position(object):
 
        See e.g. VideoMarqueeOption.Position.
     """
-    Center       = 0
-    Left         = 1
-    CenterLeft   = 1
-    Right        = 2
-    CenterRight  = 2
-    Top          = 4
-    TopCenter    = 4
-    TopLeft      = 5
-    TopRight     = 6
-    Bottom       = 8
+    Center = 0
+    Left = 1
+    CenterLeft = 1
+    Right = 2
+    CenterRight = 2
+    Top = 4
+    TopCenter = 4
+    TopLeft = 5
+    TopRight = 6
+    Bottom = 8
     BottomCenter = 8
-    BottomLeft   = 9
-    BottomRight  = 10
+    BottomLeft = 9
+    BottomRight = 10
     def __init__(self, *unused):
         raise TypeError('constants only')
-    def __setattr__(self, *unused):  #PYCHOK expected
+    def __setattr__(self, *unused):  # PYCHOK expected
         raise TypeError('immutable constants')
 
 class Rectangle(_Cstruct):
     _fields_ = [
-        ('top',    ctypes.c_int),
-        ('left',   ctypes.c_int),
+        ('top', ctypes.c_int),
+        ('left', ctypes.c_int),
         ('bottom', ctypes.c_int),
-        ('right',  ctypes.c_int),
+        ('right', ctypes.c_int),
     ]
 
 class TrackDescription(_Cstruct):
@@ -1047,7 +1047,7 @@ class TrackDescription(_Cstruct):
         return '%s(%d:%s)' % (self.__class__.__name__, self.id, self.name)
 
 TrackDescription._fields_ = [  # recursive struct
-    ('id',   ctypes.c_int   ),
+    ('id', ctypes.c_int),
     ('name', ctypes.c_char_p),
     ('next', ctypes.POINTER(TrackDescription)),
     ]
@@ -1071,29 +1071,29 @@ def track_description_list(head):
 
 class EventUnion(ctypes.Union):
     _fields_ = [
-        ('meta_type',    ctypes.c_uint    ),
-        ('new_child',    ctypes.c_uint    ),
+        ('meta_type', ctypes.c_uint),
+        ('new_child', ctypes.c_uint),
         ('new_duration', ctypes.c_longlong),
-        ('new_status',   ctypes.c_int     ),
-        ('media',        ctypes.c_void_p  ),
-        ('new_state',    ctypes.c_uint    ),
+        ('new_status', ctypes.c_int),
+        ('media', ctypes.c_void_p),
+        ('new_state', ctypes.c_uint),
         # Media instance
-        ('new_position', ctypes.c_float   ),
-        ('new_time',     ctypes.c_longlong),
-        ('new_title',    ctypes.c_int     ),
+        ('new_position', ctypes.c_float),
+        ('new_time', ctypes.c_longlong),
+        ('new_title', ctypes.c_int),
         ('new_seekable', ctypes.c_longlong),
         ('new_pausable', ctypes.c_longlong),
         # FIXME: Skipped MediaList and MediaListView...
-        ('filename',     ctypes.c_char_p  ),
-        ('new_length',   ctypes.c_longlong),
-        ('media_event',  MediaEvent       ),
+        ('filename', ctypes.c_char_p),
+        ('new_length', ctypes.c_longlong),
+        ('media_event', MediaEvent),
     ]
 
 class Event(_Cstruct):
     _fields_ = [
-        ('type',   EventType      ),
+        ('type', EventType),
         ('object', ctypes.c_void_p),
-        ('u',      EventUnion     ),
+        ('u', EventUnion),
     ]
 
 class ModuleDescription(_Cstruct):
@@ -1102,11 +1102,11 @@ class ModuleDescription(_Cstruct):
         return '%s %s (%s)' % (self.__class__.__name__, self.shortname, self.name)
 
 ModuleDescription._fields_ = [  # recursive struct
-    ('name',      ctypes.c_char_p),
+    ('name', ctypes.c_char_p),
     ('shortname', ctypes.c_char_p),
-    ('longname',  ctypes.c_char_p),
-    ('help',      ctypes.c_char_p),
-    ('next',      ctypes.POINTER(ModuleDescription)),
+    ('longname', ctypes.c_char_p),
+    ('help', ctypes.c_char_p),
+    ('next', ctypes.POINTER(ModuleDescription)),
     ]
 
 def module_description_list(head):
@@ -1129,7 +1129,7 @@ class AudioOutputDevice(_Cstruct):
 
 AudioOutputDevice._fields_ = [  # recursive struct
     ('next', ctypes.POINTER(AudioOutputDevice)),
-    ('device',   ctypes.c_char_p   ),
+    ('device', ctypes.c_char_p),
     ('description', ctypes.c_char_p),
     ]
 
@@ -1192,7 +1192,7 @@ class EventManager(_Ctype):
                 method since ctypes does not prepend self as the
                 first parameter, hence this closure.
                 """
-                try: # retrieve Python callback and arguments
+                try:  # retrieve Python callback and arguments
                     call, args, kwds = self._callbacks[k]
                      # deref event.contents to simplify callback code
                     call(event.contents, *args, **kwds)
@@ -1217,7 +1217,7 @@ class EventManager(_Ctype):
 
         k = eventtype.value
         if k in self._callbacks:
-            del self._callbacks[k] # remove, regardless of libvlc return value
+            del self._callbacks[k]  # remove, regardless of libvlc return value
             libvlc_event_detach(self, k, self._callback_handler, k)
 
 class Instance(_Ctype):
@@ -2114,7 +2114,7 @@ class MediaListPlayer(_Ctype):
     def get_instance(self):
         """Return the associated Instance.
         """
-        return self._instance  #PYCHOK expected
+        return self._instance  # PYCHOK expected
 
 
     def release(self):
@@ -2243,7 +2243,7 @@ class MediaPlayer(_Ctype):
     def get_instance(self):
         """Return the associated Instance.
         """
-        return self._instance  #PYCHOK expected
+        return self._instance  # PYCHOK expected
 
     def set_mrl(self, mrl, *options):
         """Set the MRL to play.
@@ -5899,7 +5899,7 @@ if __name__ == '__main__':
         else:  # update marquee text periodically
             player.video_set_marquee_int(VideoMarqueeOption.Timeout, 0)  # millisec, 0==forever
             player.video_set_marquee_int(VideoMarqueeOption.Refresh, 1000)  # millisec (or sec?)
-            ##t = '$L / $D or $P at $T'
+            # #t = '$L / $D or $P at $T'
             t = '%Y-%m-%d  %H:%M:%S'
         player.video_set_marquee_string(VideoMarqueeOption.Text, str_to_bytes(t))
 
@@ -5908,7 +5908,7 @@ if __name__ == '__main__':
         # any number of positional and/or keyword arguments to be passed
         # to the callback (in addition to the first one, an Event instance).
         event_manager = player.event_manager()
-        event_manager.event_attach(EventType.MediaPlayerEndReached,      end_callback)
+        event_manager.event_attach(EventType.MediaPlayerEndReached, end_callback)
         event_manager.event_attach(EventType.MediaPlayerPositionChanged, pos_callback, player)
 
         def mspf():
@@ -5930,7 +5930,7 @@ if __name__ == '__main__':
                 print('Video size: %s' % str(player.video_get_size(0)))  # num=0
                 print('Scale: %s' % player.video_get_scale())
                 print('Aspect ratio: %s' % player.video_get_aspect_ratio())
-               #print('Window:' % player.get_hwnd()
+               # print('Window:' % player.get_hwnd()
             except Exception:
                 print('Error: %s' % sys.exc_info()[1])
 
@@ -5988,7 +5988,7 @@ if __name__ == '__main__':
                 keybindings[k]()
             elif k.isdigit():
                  # jump to fraction of the movie.
-                player.set_position(float('0.'+k))
+                player.set_position(float('0.' + k))
 
     else:
         print('Usage: %s <movie_filename>' % sys.argv[0])

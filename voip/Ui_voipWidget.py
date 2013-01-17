@@ -73,7 +73,7 @@ class Ui_voipWidget(object):
         self.gridLayout.addLayout(self.horizontalLayout_5, 4, 0, 1, 1)
         self.gridLayout_2.addWidget(self.groupBoxAcquisition, 0, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(voipWidget)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok|QtGui.QDialogButtonBox.Reset)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok | QtGui.QDialogButtonBox.Reset)
         self.buttonBox.setObjectName("buttonBox")
         self.gridLayout_2.addWidget(self.buttonBox, 1, 0, 1, 1)
 
@@ -87,8 +87,6 @@ class Ui_voipWidget(object):
         self.labelSipAccountUser.setText(QtGui.QApplication.translate("voipWidget", "Sip User", None, QtGui.QApplication.UnicodeUTF8))
         self.labelSipAccountPasswd.setText(QtGui.QApplication.translate("voipWidget", "Sip Password", None, QtGui.QApplication.UnicodeUTF8))
         self.labelSipStunServer.setText(QtGui.QApplication.translate("voipWidget", "Stun Server", None, QtGui.QApplication.UnicodeUTF8))
-
-import voip_rc
 
 if __name__ == "__main__":
     import sys

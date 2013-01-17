@@ -279,7 +279,6 @@ class Ui_MainWindow(object):
         self.actionAbout.setText(QtGui.QApplication.translate("MainWindow", "About Sacks", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setToolTip(QtGui.QApplication.translate("MainWindow", "About", None, QtGui.QApplication.UnicodeUTF8))
 
-import media_rc
 
 if __name__ == "__main__":
     import sys

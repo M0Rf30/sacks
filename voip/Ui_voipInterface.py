@@ -181,7 +181,7 @@ class Ui_VoipInterface(object):
         self.labelVoipDisplay.setScaledContents(True)
         self.labelVoipDisplay.setWordWrap(False)
         self.labelVoipDisplay.setIndent(-1)
-        self.labelVoipDisplay.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByMouse)
+        self.labelVoipDisplay.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByMouse)
         self.labelVoipDisplay.setObjectName("labelVoipDisplay")
         self.verticalLayout.addWidget(self.labelVoipDisplay)
         self.verticalLayout_2.addLayout(self.verticalLayout)
@@ -441,7 +441,6 @@ class Ui_VoipInterface(object):
         self.actionHangup.setText(QtGui.QApplication.translate("VoipInterface", "Hangup", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setText(QtGui.QApplication.translate("VoipInterface", "About", None, QtGui.QApplication.UnicodeUTF8))
 
-import voip_rc
 
 if __name__ == "__main__":
     import sys

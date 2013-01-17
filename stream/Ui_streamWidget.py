@@ -56,7 +56,7 @@ class Ui_streamWidget(object):
         self.gridLayout.addLayout(self.horizontalLayout_5, 1, 0, 1, 1)
         self.gridLayout_3.addWidget(self.groupBox_2, 1, 0, 1, 1)
         self.buttonBox = QtGui.QDialogButtonBox(streamWidget)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok|QtGui.QDialogButtonBox.Reset)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok | QtGui.QDialogButtonBox.Reset)
         self.buttonBox.setObjectName("buttonBox")
         self.gridLayout_3.addWidget(self.buttonBox, 2, 0, 1, 1)
         self.groupBoxAcquisition = QtGui.QGroupBox(streamWidget)
@@ -168,7 +168,6 @@ class Ui_streamWidget(object):
         self.comboBoxInputNum.setItemText(3, QtGui.QApplication.translate("streamWidget", "2", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBoxInputNum.setItemText(4, QtGui.QApplication.translate("streamWidget", "3", None, QtGui.QApplication.UnicodeUTF8))
 
-import stream_rc
 
 if __name__ == "__main__":
     import sys

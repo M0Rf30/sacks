@@ -23,39 +23,40 @@
 import sys
 from PyQt4 import QtCore, QtGui
 from Ui_confDialogsContainer import Ui_confDialogsContainer
+from stream import py_streamDialog
 
-#from stream.py_streamDialog import pystreamDialog
-#from vpn.py_vpnDialog import pyvpnDialog
+# from stream.py_streamDialog import pystreamDialog
+# from vpn.py_vpnDialog import pyvpnDialog
 
 
-#	QWidget al posto di QMainWindow
+# 	QWidget al posto di QMainWindow
 class pydialogsContainer(QtGui.QDialog):
-	def __init__(self,  parent=None):
+	def __init__(self, parent=None):
 		QtGui.QDialog.__init__(self, parent)
 		self.ui = Ui_confDialogsContainer()
 		self.ui.setupUi(self)
-#		self.show()
+# 		self.show()
 		QtCore.QObject.connect(self.ui.listWidget, QtCore.SIGNAL("currentItemChanged(QListWidgetItem *, QListWidgetItem *)"), self.changePage)
 		self.stackedWidget = QtGui.QStackedWidget()
 		self.ui.horizontalLayout.addWidget(self.stackedWidget)
-		self.closeButton=self.ui.closeButton
+		self.closeButton = self.ui.closeButton
 		
-#		a=pystreamDialog()
-#		vpnDialog=pyvpnDialog()
-#		vpnDialog.iconDialog=a.iconDialog
-#		vpnDialog.nameDialog=a.nameDialog
-#		self.addDialog(vpnDialog)
+# 		a=pystreamDialog()
+# 		vpnDialog=pyvpnDialog()
+# 		vpnDialog.iconDialog=a.iconDialog
+# 		vpnDialog.nameDialog=a.nameDialog
+# 		self.addDialog(vpnDialog)
 	def changePage(self, currentPage, previousPage):
 		if not currentPage:
 			currentPage = previousPage
-		print "currentIndexList: "+ str(self.ui.listWidget.row(currentPage))
+		print "currentIndexList: " + str(self.ui.listWidget.row(currentPage))
 		self.stackedWidget.setCurrentIndex(self.ui.listWidget.row(currentPage))
 
 	
 	def setCurrentDialog(self, dialogSlot):
 		print "current dialog"
 		self.ui.listWidget.setCurrentItem(dialogSlot.listWidgetItem)
-		#self.stackedWidget.setCurrentWidget(dialog)
+		# self.stackedWidget.setCurrentWidget(dialog)
 	def addDialog(self, dialogSlot):
 		self.stackedWidget.addWidget(dialogSlot)
 		self.ui.listWidget.addItem(dialogSlot.listWidgetItem)
@@ -67,8 +68,8 @@ class pydialogsContainer(QtGui.QDialog):
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
 	dialog = pydialogsContainer()
-#	vpnDialog=pyvpnDialog()
-	stream=pystreamDialog()
+# 	vpnDialog=pyvpnDialog()
+	stream = py_streamDialog.pystreamDialog()
 	dialog.addDialog(stream)
 	
 	sys.exit(app.exec_())

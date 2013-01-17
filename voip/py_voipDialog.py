@@ -30,66 +30,66 @@ class pyvoipDialog(QtGui.QDialog):
 		QtGui.QDialog.__init__(self, parent)
 		self.ui = Ui_voipWidget()
 		self.ui.setupUi(self)
-		self.okClicked=False
-		self.settings=settings
-		self.voipParameters={}
+		self.okClicked = False
+		self.settings = settings
+		self.voipParameters = {}
 		
-		self.iconDialog=self.windowIcon()
-		self.nameDialog=self.windowTitle()
-		self.listWidgetItem=QtGui.QListWidgetItem()
+		self.iconDialog = self.windowIcon()
+		self.nameDialog = self.windowTitle()
+		self.listWidgetItem = QtGui.QListWidgetItem()
 		self.listWidgetItem.setIcon(self.iconDialog)
 		self.listWidgetItem.setText(self.nameDialog)
 		
-		sipProvider=self.settings.value("voip/sipProvider", QtCore.QVariant(""))
-		self.voipParameters["sipProvider"]=str(sipProvider.toString())
+		sipProvider = self.settings.value("voip/sipProvider", QtCore.QVariant(""))
+		self.voipParameters["sipProvider"] = str(sipProvider.toString())
 		self.ui.lineEditSipProvider.setText(self.voipParameters["sipProvider"])
 		
-		sipAccountUser=self.settings.value("voip/sipAccountUser", QtCore.QVariant(""))
-		self.voipParameters["sipAccountUser"]=str(sipAccountUser.toString())
+		sipAccountUser = self.settings.value("voip/sipAccountUser", QtCore.QVariant(""))
+		self.voipParameters["sipAccountUser"] = str(sipAccountUser.toString())
 		self.ui.lineEditSipAccountUser.setText(self.voipParameters["sipAccountUser"])
 	
-		sipAccountPasswd=self.settings.value("voip/sipAccountPasswd", QtCore.QVariant(""))
-		self.voipParameters["sipAccountPasswd"]=str(sipAccountPasswd.toString())
+		sipAccountPasswd = self.settings.value("voip/sipAccountPasswd", QtCore.QVariant(""))
+		self.voipParameters["sipAccountPasswd"] = str(sipAccountPasswd.toString())
 		self.ui.lineEditSipAccountPasswd.setText(self.voipParameters["sipAccountPasswd"])
 		
-		sipStunServer=self.settings.value("voip/sipStunServer", QtCore.QVariant(""))
-		self.voipParameters["sipStunServer"]=str(sipStunServer.toString())
+		sipStunServer = self.settings.value("voip/sipStunServer", QtCore.QVariant(""))
+		self.voipParameters["sipStunServer"] = str(sipStunServer.toString())
 		self.ui.lineEditSipStunServer.setText(self.voipParameters["sipStunServer"])
 		
 		QtCore.QObject.connect(self.ui.buttonBox, QtCore.SIGNAL("clicked (QAbstractButton *)"), self.buttonClicked)
-#		QtCore.QObject.connect(self.ui.checkBoxAudioSamplerate, QtCore.SIGNAL("toggled (bool)"), lambda: self.ui.spinBoxAudioSamplerate.setValue(0))
-#		QtCore.QObject.connect(self.ui.checkBoxVideoBitrate, QtCore.SIGNAL("toggled (bool)"), lambda: self.ui.spinBoxVideoBitrate.setValue(256))
-#		QtCore.QObject.connect(self.ui.checkBoxAudioBitrate, QtCore.SIGNAL("toggled (bool)"), lambda: self.ui.spinBoxAudioBitrate.setValue(16))
+# 		QtCore.QObject.connect(self.ui.checkBoxAudioSamplerate, QtCore.SIGNAL("toggled (bool)"), lambda: self.ui.spinBoxAudioSamplerate.setValue(0))
+# 		QtCore.QObject.connect(self.ui.checkBoxVideoBitrate, QtCore.SIGNAL("toggled (bool)"), lambda: self.ui.spinBoxVideoBitrate.setValue(256))
+# 		QtCore.QObject.connect(self.ui.checkBoxAudioBitrate, QtCore.SIGNAL("toggled (bool)"), lambda: self.ui.spinBoxAudioBitrate.setValue(16))
 			
 	def returnParameters(self):
 		return self.voipParameters
 	def buttonClicked(self, button):
-		buttonClickedRole=self.ui.buttonBox.buttonRole(button)
+		buttonClickedRole = self.ui.buttonBox.buttonRole(button)
 		
-		if buttonClickedRole==QtGui.QDialogButtonBox.ResetRole:
+		if buttonClickedRole == QtGui.QDialogButtonBox.ResetRole:
 			self.ui.lineEditSipProvider.clear()
 			self.ui.lineEditSipAccountUser.clear()
 			self.ui.lineEditSipAccountPasswd.clear()
 			self.ui.lineEditSipStunServer.clear()
-		elif buttonClickedRole==QtGui.QDialogButtonBox.AcceptRole:
-			sipProvider=self.ui.lineEditSipProvider.text()
-			self.voipParameters["sipProvider"]=sipProvider
-			sipAccountUser=self.ui.lineEditSipAccountUser.text()
-			self.voipParameters["sipAccountUser"]=sipAccountUser
-			sipAccountPasswd=self.ui.lineEditSipAccountPasswd.text()
-			self.voipParameters["sipAccountPasswd"]=sipAccountPasswd				
-			sipStunServer=self.ui.lineEditSipStunServer.text()
-			self.voipParameters["sipStunServer"]=sipStunServer
+		elif buttonClickedRole == QtGui.QDialogButtonBox.AcceptRole:
+			sipProvider = self.ui.lineEditSipProvider.text()
+			self.voipParameters["sipProvider"] = sipProvider
+			sipAccountUser = self.ui.lineEditSipAccountUser.text()
+			self.voipParameters["sipAccountUser"] = sipAccountUser
+			sipAccountPasswd = self.ui.lineEditSipAccountPasswd.text()
+			self.voipParameters["sipAccountPasswd"] = sipAccountPasswd				
+			sipStunServer = self.ui.lineEditSipStunServer.text()
+			self.voipParameters["sipStunServer"] = sipStunServer
 			
 			self.settings.setValue("voip/sipProvider", QtCore.QVariant(self.voipParameters["sipProvider"]))
 			self.settings.setValue("voip/sipAccountUser", QtCore.QVariant(self.voipParameters["sipAccountUser"]))
 			self.settings.setValue("voip/sipAccountPasswd", QtCore.QVariant(self.voipParameters["sipAccountPasswd"]))
 			self.settings.setValue("voip/sipStunServer", QtCore.QVariant(self.voipParameters["sipStunServer"]))
 		
-			print "sipProvider: "+ self.voipParameters["sipProvider"]
-			print "sipAccountUser: "+ self.voipParameters["sipAccountUser"]
-			print "sipAccountPasswd: "+ self.voipParameters["sipAccountPasswd"]
-			print "sipStunServer: "+ self.voipParameters["sipStunServer"]
+			print "sipProvider: " + self.voipParameters["sipProvider"]
+			print "sipAccountUser: " + self.voipParameters["sipAccountUser"]
+			print "sipAccountPasswd: " + self.voipParameters["sipAccountPasswd"]
+			print "sipStunServer: " + self.voipParameters["sipStunServer"]
 	
 	def showEvent(self, showEvent):
 		print "showEvent"
@@ -101,7 +101,7 @@ class pyvoipDialog(QtGui.QDialog):
 	
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
-	settings=QtCore.QSettings("Intellicom", "Prove")
+	settings = QtCore.QSettings("Intellicom", "Prove")
 	mainpymplayer = pyvoipDialog(settings)
 	mainpymplayer.show()
 	sys.exit(app.exec_())

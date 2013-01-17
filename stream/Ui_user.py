@@ -159,7 +159,6 @@ class Ui_User(object):
         self.labelVolume.setText(QtGui.QApplication.translate("User", "Volume", None, QtGui.QApplication.UnicodeUTF8))
         self.muteFlag.setText(QtGui.QApplication.translate("User", "Mute", None, QtGui.QApplication.UnicodeUTF8))
 
-import stream_rc
 
 if __name__ == "__main__":
     import sys

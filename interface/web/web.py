@@ -29,7 +29,7 @@ The class is "webWidget", which is used to create an interface to web pages navi
 
 import sys
 
-from PyQt4 import QtCore, QtGui,  QtWebKit
+from PyQt4 import QtCore, QtGui, QtWebKit
 from Ui_web import Ui_webForm
 
 
@@ -39,28 +39,22 @@ class webWidget(QtGui.QMainWindow):
 		super(webWidget, self).__init__(parent)
 		self.ui = Ui_webForm()
 		self.ui.setupUi(self)
-		self.webPage=self.ui.webView.page()
-		self.webSettings=self.webPage.settings()
-		self.webSettings.setAttribute(QtWebKit.QWebSettings.PluginsEnabled,True)
-		self.webSettings.setAttribute(QtWebKit.QWebSettings.JavascriptEnabled,True)
-		self.webSettings.setAttribute(QtWebKit.QWebSettings.JavaEnabled,True)
+		self.webPage = self.ui.webView.page()
+		self.webSettings = self.webPage.settings()
+		self.webSettings.setAttribute(QtWebKit.QWebSettings.PluginsEnabled, True)
+		self.webSettings.setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, True)
+		self.webSettings.setAttribute(QtWebKit.QWebSettings.JavaEnabled, True)
 
-		self.webMainFrame=self.webPage.mainFrame()
-		self.printer=QtGui.QPrinter()
-		self.menuWeb=self.ui.menuWeb
-		self.menuBar=self.ui.menuBar
-		self.toolBar=self.ui.toolBar
-		self.actionSpreadLink=self.ui.actionSpreadLink
-		self.urlWeb=self.ui.urlWeb
-		
-#		# set margins
-#		webWidgetLayout = self.layout()
-#		webWidgetLayout.setMargin(0)
-#		self.ui.horizontalLayout.setMargin(5)
+		self.webMainFrame = self.webPage.mainFrame()
+		self.printer = QtGui.QPrinter()
+		self.menuWeb = self.ui.menuWeb
+		self.menuBar = self.ui.menuBar
+		self.toolBar = self.ui.toolBar
+		self.actionSpreadLink = self.ui.actionSpreadLink
+		self.urlWeb = self.ui.urlWeb
 		
 		# set the default page
-		url = 'http://193.205.171.97'
-		#url = 'http://intellicom.eushells.net'
+		url = 'http://www.google.it'
 		self.ui.urlWeb.setText(url)
 		
 		# load page
@@ -69,25 +63,23 @@ class webWidget(QtGui.QMainWindow):
 		self.ui.actionBack.setEnabled(False)
 		self.ui.actionNext.setEnabled(False)
 
-		QtCore.QObject.connect(self.ui.actionBack,QtCore.SIGNAL("triggered()"), self.back)
-		QtCore.QObject.connect(self.ui.actionNext,QtCore.SIGNAL("triggered()"), self.next)
-		QtCore.QObject.connect(self.ui.actionPrint,QtCore.SIGNAL("triggered()"), self.webPrint)
-		#QtCore.QObject.connect(self.ui.actionSpreadLink,QtCore.SIGNAL("triggered()"), self.spreadLink)
-		QtCore.QObject.connect(self.ui.actionPrintPreview,QtCore.SIGNAL("triggered()"), self.webPrintPreview)
-		QtCore.QObject.connect(self.ui.urlWeb,QtCore.SIGNAL("returnPressed()"), self.urlChanged)
-		QtCore.QObject.connect(self.ui.webView,QtCore.SIGNAL("linkClicked (const QUrl&)"), self.linkClicked)
-		QtCore.QObject.connect(self.ui.webView,QtCore.SIGNAL("urlChanged (const QUrl&)"), self.linkClicked)
-		QtCore.QObject.connect(self.ui.webView,QtCore.SIGNAL("loadProgress (int)"), self.loadProgress)
-#		QtCore.QObject.connect(self.ui.webView,QtCore.SIGNAL("titleChanged (const QString&)"), self.title_changed)
-		QtCore.QObject.connect(self.ui.actionReload,QtCore.SIGNAL("triggered()"), self.reloadPage)
-		QtCore.QObject.connect(self.ui.actionStop,QtCore.SIGNAL("triggered()"), self.stopPage)
+		QtCore.QObject.connect(self.ui.actionBack, QtCore.SIGNAL("triggered()"), self.back)
+		QtCore.QObject.connect(self.ui.actionNext, QtCore.SIGNAL("triggered()"), self.next)
+		QtCore.QObject.connect(self.ui.actionPrint, QtCore.SIGNAL("triggered()"), self.webPrint)
+		QtCore.QObject.connect(self.ui.actionPrintPreview, QtCore.SIGNAL("triggered()"), self.webPrintPreview)
+		QtCore.QObject.connect(self.ui.urlWeb, QtCore.SIGNAL("returnPressed()"), self.urlChanged)
+		QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("linkClicked (const QUrl&)"), self.linkClicked)
+		QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("urlChanged (const QUrl&)"), self.linkClicked)
+		QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("loadProgress (int)"), self.loadProgress)
+		QtCore.QObject.connect(self.ui.actionReload, QtCore.SIGNAL("triggered()"), self.reloadPage)
+		QtCore.QObject.connect(self.ui.actionStop, QtCore.SIGNAL("triggered()"), self.stopPage)
 		
 		QtCore.QMetaObject.connectSlotsByName(self)
 	
 	def urlChanged(self):
-#		"""
-#		Url have been changed by user
-#		"""
+# 		"""
+# 		Url have been changed by user
+# 		"""
 		page = self.ui.webView.page()
 		history = page.history()
 		if history.canGoBack():
@@ -100,41 +92,41 @@ class webWidget(QtGui.QMainWindow):
 			self.ui.actionNext.setEnabled(False)
 		
 		url = self.ui.urlWeb.text()
+		if not str(url).startswith('http://'):
+			url = "http://" + url 
 		self.ui.webView.setUrl(QtCore.QUrl(url))
-		
 	def stopPage(self):
-#		"""
-#		Stop loading the page
-#		"""
+# 		"""
+# 		Stop loading the page
+# 		"""
 		print "stop"
 		self.ui.webView.stop()
 	
-#	def title_changed(self, title):
-#		"""
-#		Web page title changed - change the tab name
-#		"""
-#		self.setWindowTitle(title)
+# 	def title_changed(self, title):
+# 		"""
+# 		Web page title changed - change the tab name
+# 		"""
+# 		self.setWindowTitle(title)
 	def webPrint(self):
-		printDialog=QtGui.QPrintDialog(self.printer, self)
-		printDialogOptions=QtGui.QAbstractPrintDialog.PrintToFile|QtGui.QAbstractPrintDialog.PrintSelection|QtGui.QAbstractPrintDialog.PrintPageRange	|QtGui.QAbstractPrintDialog.PrintCollateCopies	|QtGui.QAbstractPrintDialog.PrintShowPageSize|QtGui.QAbstractPrintDialog.DontUseSheet
-		if printDialog.exec_()==QtGui.QDialog.Accepted:
+		printDialog = QtGui.QPrintDialog(self.printer, self)
+		if printDialog.exec_() == QtGui.QDialog.Accepted:
 			self.ui.webView.print_(self.printer)
 
 	def webPrintPreview(self):
-		printPreviewDialog=QtGui.QPrintPreviewDialog(self.printer,  self)
-		QtCore.QObject.connect(printPreviewDialog,QtCore.SIGNAL("paintRequested (QPrinter *)"), self.ui.webView.print_)
+		printPreviewDialog = QtGui.QPrintPreviewDialog(self.printer, self)
+		QtCore.QObject.connect(printPreviewDialog, QtCore.SIGNAL("paintRequested (QPrinter *)"), self.ui.webView.print_)
 		printPreviewDialog.exec_()
 
 	def reloadPage(self):
-#		"""
-#		Reload the web page
-#		"""
+# 		"""
+# 		Reload the web page
+# 		"""
 		self.ui.webView.setUrl(QtCore.QUrl(self.ui.urlWeb.text()))
 	
 	def linkClicked(self, url):
-#		"""
-#		Update the URL if a link on a web page is clicked
-#		"""
+# 		"""
+# 		Update the URL if a link on a web page is clicked
+# 		"""
 		page = self.ui.webView.page()
 		history = page.history()
 		if history.canGoBack():
@@ -158,9 +150,9 @@ class webWidget(QtGui.QMainWindow):
 			self.ui.actionStop.setEnabled(True)
 		
 	def back(self):
-#		"""
-#		Back button clicked, go one page back
-#		"""
+# 		"""
+# 		Back button clicked, go one page back
+# 		"""
 		page = self.ui.webView.page()
 		history = page.history()
 		history.back()
@@ -170,9 +162,9 @@ class webWidget(QtGui.QMainWindow):
 			self.ui.actionBack.setEnabled(False)
 	
 	def next(self):
-#		"""
-#		Next button clicked, go to next page
-#		"""
+# 		"""
+# 		Next button clicked, go to next page
+# 		"""
 		page = self.ui.webView.page()
 		history = page.history()
 		history.forward()
@@ -182,8 +174,8 @@ class webWidget(QtGui.QMainWindow):
 			self.ui.actionNext.setEnabled(False)
 			
 	def spreadLink(self):
-		linkPath=self.ui.urlWeb.text()
-		self.emit(QtCore.SIGNAL('spreadLink'),linkPath)
+		linkPath = self.ui.urlWeb.text()
+		self.emit(QtCore.SIGNAL('spreadLink'), linkPath)
 		
 	def closeEvent(self, closeEvent):
 		self.ui.webView.setUrl(QtCore.QUrl(""))

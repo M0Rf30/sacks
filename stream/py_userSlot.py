@@ -30,27 +30,26 @@ The class is "pyuserSlot" that import a gui interface that represent status info
 import sys
 from PyQt4 import QtCore, QtGui
 from Ui_user import Ui_User
-#sys.path.append('stream')
+# sys.path.append('stream')
 from py_stream import pystream
-import stream_rc
-#	QWidget al posto di QMainWindow
+# 	QWidget al posto di QMainWindow
 class pyuserSlot(QtGui.QWidget):
-	def __init__(self, nameSlot,  parent=None):
+	def __init__(self, nameSlot, parent=None):
 		QtGui.QWidget.__init__(self, parent)
 		self.ui = Ui_User()
 		self.ui.setupUi(self)
-		self.nameSlot=nameSlot
+		self.nameSlot = nameSlot
 		self.setWindowTitle(nameSlot)
-		self.labelOnline=self.ui.labelOnline
-		self.pushButtonActiveMedia=self.ui.pushButtonActiveMedia
-		self.pushButtonToken=self.ui.pushButtonToken
-		self.pushButtonShowMedia=self.ui.showMedia
-		self.pushButtonVoipCall=self.ui.pushButtonVoipCall
-		self.pushButtonRemoteDesktopControl=self.ui.pushButtonRemoteDesktopControl
-		self.buttonRemoteDesktop=self.ui.buttonRemoteDesktop
-		self.buttonOnFocus=self.ui.buttonOnFocus
-		self.listWidgetReceiveMsg=self.ui.listWidgetReceiveMsg
-		self.lineEditSendMsg=self.ui.lineEditSendMsg
+		self.labelOnline = self.ui.labelOnline
+		self.pushButtonActiveMedia = self.ui.pushButtonActiveMedia
+		self.pushButtonToken = self.ui.pushButtonToken
+		self.pushButtonShowMedia = self.ui.showMedia
+		self.pushButtonVoipCall = self.ui.pushButtonVoipCall
+		self.pushButtonRemoteDesktopControl = self.ui.pushButtonRemoteDesktopControl
+		self.buttonRemoteDesktop = self.ui.buttonRemoteDesktop
+		self.buttonOnFocus = self.ui.buttonOnFocus
+		self.listWidgetReceiveMsg = self.ui.listWidgetReceiveMsg
+		self.lineEditSendMsg = self.ui.lineEditSendMsg
 		self.iconUser = QtGui.QIcon()		
 		self.iconUser.addPixmap(QtGui.QPixmap(":/stream/interface/images/actions/user.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
@@ -63,44 +62,44 @@ class pyuserSlot(QtGui.QWidget):
 		self.iconUserEnabled = QtGui.QIcon()		
 		self.iconUserEnabled.addPixmap(QtGui.QPixmap(":/stream/interface/images/actions/user.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-		self.iconActiveOff=QtGui.QIcon()
+		self.iconActiveOff = QtGui.QIcon()
 		self.iconActiveOff.addPixmap(QtGui.QPixmap(":/stream/interface/images/actions/kimproxyoffline.png"))
 		
-		self.iconActiveOn=QtGui.QIcon()
+		self.iconActiveOn = QtGui.QIcon()
 		self.iconActiveOn.addPixmap(QtGui.QPixmap(":/stream/interface/images/actions/kimproxyonline.png"))
 		
-		self.pixmapConnetedOn=QtGui.QPixmap(":/stream/interface/images/actions/connect_established.png")
-		self.pixmapConnetedOff=QtGui.QPixmap(":/stream/interface/images/actions/connect_no.png")
-		self.pixmapInRoom=QtGui.QPixmap(":/stream/interface/images/actions/button_ok.png")
-		self.pixmapOutRoom=QtGui.QPixmap("")
-		#self.pushButtonActiveMedia.setIcon(self.iconActiveOff)
+		self.pixmapConnetedOn = QtGui.QPixmap(":/stream/interface/images/actions/connect_established.png")
+		self.pixmapConnetedOff = QtGui.QPixmap(":/stream/interface/images/actions/connect_no.png")
+		self.pixmapInRoom = QtGui.QPixmap(":/stream/interface/images/actions/button_ok.png")
+		self.pixmapOutRoom = QtGui.QPixmap("")
+		# self.pushButtonActiveMedia.setIcon(self.iconActiveOff)
 		
 		
 		
 		self.setWindowIcon(self.iconUser)
-		self.interfaceDict={}
-		self.interfaceDict["percentage"]=0
+		self.interfaceDict = {}
+		self.interfaceDict["percentage"] = 0
 		
 		imageUser = QtGui.QImage()
 		imageUser.load(ur'c:\print.png')
 
 		
-		self.streamLink=0
+		self.streamLink = 0
 		
 		print r'c:\print.png'
-	#	self.ui.imageUserLabel.setPixmap(QtGui.QPixmap.fromImage(imageUser))
+	# 	self.ui.imageUserLabel.setPixmap(QtGui.QPixmap.fromImage(imageUser))
 		
-		self.mdiWin=pystream()
-		self.sliderVol=self.ui.sliderVolume
-		self.muteFlag=self.ui.muteFlag
+		self.mdiWin = pystream()
+		self.sliderVol = self.ui.sliderVolume
+		self.muteFlag = self.ui.muteFlag
 		
 		QtCore.QObject.connect(self.ui.sliderVolume, QtCore.SIGNAL("valueChanged(int)"), self.setVolume)
-		QtCore.QObject.connect(self.ui.muteFlag, QtCore.SIGNAL("clicked(bool)"),self.mdiWin.setMute )
+		QtCore.QObject.connect(self.ui.muteFlag, QtCore.SIGNAL("clicked(bool)"), self.mdiWin.setMute)
 		QtCore.QObject.connect(self.mdiWin, QtCore.SIGNAL("closeEmitApp()"), self.mdiWinFinished)
 		QtCore.QObject.connect(self.ui.showMedia, QtCore.SIGNAL("toggled (bool)"), self.showMedia)
 		QtCore.QObject.connect(self.ui.lineEditSendMsg, QtCore.SIGNAL("returnPressed ()"), self.sendMsg)
-		#QtCore.QObject.connect(self.ui.pushButtonSendFile, QtCore.SIGNAL("clicked ()"), self.sendFile)
-		QtCore.QObject.connect(self.ui.listWidgetReceiveMsg,  QtCore.SIGNAL("itemChanged (QListWidgetItem *)"), self.setRightMsgItem)
+		# QtCore.QObject.connect(self.ui.pushButtonSendFile, QtCore.SIGNAL("clicked ()"), self.sendFile)
+		QtCore.QObject.connect(self.ui.listWidgetReceiveMsg, QtCore.SIGNAL("itemChanged (QListWidgetItem *)"), self.setRightMsgItem)
 	def setVolume(self, volumeValue):
 		print 'Volume'	
 		print volumeValue
@@ -116,49 +115,49 @@ class pyuserSlot(QtGui.QWidget):
 
 
 	def showMedia(self, activeMedia):
-		streamInfoDict={}
+		streamInfoDict = {}
 		print activeMedia
 		if activeMedia:
-#			self.buttonOnFocus.setEnabled(True)
+# 			self.buttonOnFocus.setEnabled(True)
 			if self.streamLink:
-				if sys.platform=='win32':
-				#self.mdiWin.streamInfoDict['streamContent']=ur"c:\\fant.mpg"
-					streamInfoDict['streamContent']=self.streamLink
+				if sys.platform == 'win32':
+				# self.mdiWin.streamInfoDict['streamContent']=ur"c:\\fant.mpg"
+					streamInfoDict['streamContent'] = self.streamLink
 				else:
-				#self.mdiWin.streamInfoDict['streamContent']=ur"/home/marcello/fant.mpg"
+				# self.mdiWin.streamInfoDict['streamContent']=ur"/home/marcello/fant.mpg"
 				
-					streamInfoDict['streamContent']=self.streamLink
+					streamInfoDict['streamContent'] = self.streamLink
 
-#			self.mdiWin.streamInfoDict['streamContent']=ur"acquisitionVideo"
-#			self.mdiWin.show()
+# 			self.mdiWin.streamInfoDict['streamContent']=ur"acquisitionVideo"
+# 			self.mdiWin.show()
 				self.mdiWin.initialize(streamInfoDict)
 				self.mdiWin.start()
 				self.mdiWin.show()
-#			self.mdiWin.start(ur"c:\\fant.mpg")
-#qui' punto critico
+# 			self.mdiWin.start(ur"c:\\fant.mpg")
+# qui' punto critico
 		else:
-#			self.buttonOnFocus.setEnabled(False)
+# 			self.buttonOnFocus.setEnabled(False)
 			self.mdiWin.close()
 			print self.mdiWin
 
 	def sendMsg(self):
-		msg=self.ui.lineEditSendMsg.text()
+		msg = self.ui.lineEditSendMsg.text()
 		self.ui.lineEditSendMsg.clear()
-		msgShow="me: "+ msg
+		msgShow = "me: " + msg
 		self.listShow(msgShow)
 		self.emit(QtCore.SIGNAL('sendMsg'), msg)
 		
 	def sendFile(self):
-		homePath=QtCore.QDir.home().absolutePath()
+		homePath = QtCore.QDir.home().absolutePath()
 		fileName = QtGui.QFileDialog.getOpenFileName(self, "Open File", homePath, ("All files (*)"))
 		if not fileName.isEmpty():
-			file=QtCore.QFile(fileName)
-			self.emit(QtCore.SIGNAL('sendFile'), self.nameSlot,  file)
+			filename = QtCore.QFile(fileName)
+			self.emit(QtCore.SIGNAL('sendFile'), self.nameSlot, filename)
 		else:
 			print "file non selezionato"
 	def listShow(self, msg):
-		itemListWidget=QtGui.QListWidgetItem(msg)
-		itemListWidget.msgText=msg
+		itemListWidget = QtGui.QListWidgetItem(msg)
+		itemListWidget.msgText = msg
 		itemListWidget.setFlags(QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled)
 		
 		self.ui.listWidgetReceiveMsg.addItem(itemListWidget)
@@ -166,19 +165,19 @@ class pyuserSlot(QtGui.QWidget):
 	def setRightMsgItem(self, itemListWidget):
 		itemListWidget.setText(itemListWidget.msgText)
 		
-	def updateInterface(self,  item,  value):
-		update=False
+	def updateInterface(self, item, value):
+		update = False
 		if self.interfaceDict.has_key(item):
-			if self.interfaceDict[item]!=value:
-				self.interfaceDict[item]=value
-				update=True
+			if self.interfaceDict[item] != value:
+				self.interfaceDict[item] = value
+				update = True
 				
 		else:
-			self.interfaceDict[item]=value
-			update=True
+			self.interfaceDict[item] = value
+			update = True
 			
 		if update:
-			if item=="percentage":
+			if item == "percentage":
 				self.ui.progressBar.setValue(value)
 				
 			
@@ -191,7 +190,7 @@ if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
 	mainpymplayer = pyuserSlot("marcello")
 	mainpymplayer.ui.showMedia.setEnabled(True)
-	mainpymplayer.streamLink="http://82.211.18.118:1251"
+	mainpymplayer.streamLink = "http://82.211.18.118:1251"
 	mainpymplayer.show()
 	
 	

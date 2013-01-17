@@ -122,7 +122,6 @@ class Ui_webForm(object):
         self.actionSpreadLink.setText(QtGui.QApplication.translate("webForm", "spreadLink", None, QtGui.QApplication.UnicodeUTF8))
 
 from PyQt4 import QtWebKit
-import web_rc
 
 if __name__ == "__main__":
     import sys
