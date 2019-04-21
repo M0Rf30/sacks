@@ -28,15 +28,15 @@ The class is "pyuserSlot" that import a gui interface that represent status info
 """
 #!/usr/bin/python
 import sys
-from PyQt4 import QtCore, QtGui
-from Ui_user import Ui_User
-import stream_rc
+from PyQt5 import QtCore, QtGui, QtWidgets
+from .Ui_user import Ui_User
+from . import stream_rc
 # sys.path.append('stream')
-from py_stream import pystream
+from .py_stream import pystream
 # 	QWidget al posto di QMainWindow
-class pyuserSlot(QtGui.QWidget):
+class pyuserSlot(QtWidgets.QWidget):
 	def __init__(self, nameSlot, parent=None):
-		QtGui.QWidget.__init__(self, parent)
+		QtWidgets.QWidget.__init__(self, parent)
 		self.ui = Ui_User()
 		self.ui.setupUi(self)
 		self.nameSlot = nameSlot
@@ -82,12 +82,12 @@ class pyuserSlot(QtGui.QWidget):
 		self.interfaceDict["percentage"] = 0
 		
 		imageUser = QtGui.QImage()
-		imageUser.load(ur'c:\print.png')
+		imageUser.load(r'c:\print.png')
 
 		
 		self.streamLink = 0
 		
-		print r'c:\print.png'
+		print(r'c:\print.png')
 	# 	self.ui.imageUserLabel.setPixmap(QtGui.QPixmap.fromImage(imageUser))
 		
 		self.mdiWin = pystream()
@@ -102,22 +102,22 @@ class pyuserSlot(QtGui.QWidget):
 		# QtCore.QObject.connect(self.ui.pushButtonSendFile, QtCore.SIGNAL("clicked ()"), self.sendFile)
 		QtCore.QObject.connect(self.ui.listWidgetReceiveMsg, QtCore.SIGNAL("itemChanged (QListWidgetItem *)"), self.setRightMsgItem)
 	def setVolume(self, volumeValue):
-		print 'Volume'	
-		print volumeValue
+		print('Volume')	
+		print(volumeValue)
 
 		self.mdiWin.setVolume(volumeValue)
 		self.ui.muteFlag.setChecked(False)
 		
 	
 	def mdiWinFinished(self):
-		print "mdiFinished"
+		print("mdiFinished")
 		self.ui.showMedia.setChecked(False)
 		
 
 
 	def showMedia(self, activeMedia):
 		streamInfoDict = {}
-		print activeMedia
+		print(activeMedia)
 		if activeMedia:
 # 			self.buttonOnFocus.setEnabled(True)
 			if self.streamLink:
@@ -139,7 +139,7 @@ class pyuserSlot(QtGui.QWidget):
 		else:
 # 			self.buttonOnFocus.setEnabled(False)
 			self.mdiWin.close()
-			print self.mdiWin
+			print(self.mdiWin)
 
 	def sendMsg(self):
 		msg = self.ui.lineEditSendMsg.text()
@@ -155,7 +155,7 @@ class pyuserSlot(QtGui.QWidget):
 			filename = QtCore.QFile(fileName)
 			self.emit(QtCore.SIGNAL('sendFile'), self.nameSlot, filename)
 		else:
-			print "file non selezionato"
+			print("file non selezionato")
 	def listShow(self, msg):
 		itemListWidget = QtGui.QListWidgetItem(msg)
 		itemListWidget.msgText = msg
@@ -168,7 +168,7 @@ class pyuserSlot(QtGui.QWidget):
 		
 	def updateInterface(self, item, value):
 		update = False
-		if self.interfaceDict.has_key(item):
+		if item in self.interfaceDict:
 			if self.interfaceDict[item] != value:
 				self.interfaceDict[item] = value
 				update = True
@@ -184,7 +184,7 @@ class pyuserSlot(QtGui.QWidget):
 			
 	def closeEvent(self, closeEvent):
 		self.mdiWin.close()
-		print "closeEvent Userslot", closeEvent
+		print("closeEvent Userslot", closeEvent)
 		self.ui.buttonRemoteDesktop.setChecked(False)
 		
 if __name__ == "__main__":

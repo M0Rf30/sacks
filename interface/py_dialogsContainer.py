@@ -21,18 +21,18 @@
 
 
 import sys
-from PyQt4 import QtCore, QtGui
-from Ui_confDialogsContainer import Ui_confDialogsContainer
-from stream import py_streamDialog
+from PyQt5 import QtCore, QtGui, QtWidgets
+from .Ui_confDialogsContainer import Ui_confDialogsContainer
+from .stream import py_streamDialog
 
 # from stream.py_streamDialog import pystreamDialog
 # from vpn.py_vpnDialog import pyvpnDialog
 
 
 # 	QWidget al posto di QMainWindow
-class pydialogsContainer(QtGui.QDialog):
+class pydialogsContainer(QtWidgets.QDialog):
 	def __init__(self, parent=None):
-		QtGui.QDialog.__init__(self, parent)
+		QtWidgets.QDialog.__init__(self, parent)
 		self.ui = Ui_confDialogsContainer()
 		self.ui.setupUi(self)
 # 		self.show()
@@ -49,12 +49,12 @@ class pydialogsContainer(QtGui.QDialog):
 	def changePage(self, currentPage, previousPage):
 		if not currentPage:
 			currentPage = previousPage
-		print "currentIndexList: " + str(self.ui.listWidget.row(currentPage))
+		print("currentIndexList: " + str(self.ui.listWidget.row(currentPage)))
 		self.stackedWidget.setCurrentIndex(self.ui.listWidget.row(currentPage))
 
 	
 	def setCurrentDialog(self, dialogSlot):
-		print "current dialog"
+		print("current dialog")
 		self.ui.listWidget.setCurrentItem(dialogSlot.listWidgetItem)
 		# self.stackedWidget.setCurrentWidget(dialog)
 	def addDialog(self, dialogSlot):

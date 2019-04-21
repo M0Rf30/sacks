@@ -20,15 +20,15 @@
 #
 
 import sys
-from PyQt4 import QtCore, QtGui
-from Ui_voipInterface import Ui_VoipInterface
-from py_voip import pyvoip
-from py_voipDialog import pyvoipDialog
+from PyQt5 import QtCore, QtGui
+from .Ui_voipInterface import Ui_VoipInterface
+from .py_voip import pyvoip
+from .py_voipDialog import pyvoipDialog
 class pyvoipInterface(QtGui.QMainWindow):
 	def __init__(self, voipSettings=None, parent=None):
 		QtGui.QMainWindow.__init__(self, parent)
 		self.ui = Ui_VoipInterface()
-		print "parent Voip: ", parent
+		print("parent Voip: ", parent)
 		
 		self.ui.setupUi(self)
 		if parent:
@@ -53,7 +53,7 @@ class pyvoipInterface(QtGui.QMainWindow):
 		self.iconRegistering = QtGui.QIcon(self.ui.actionRegister.icon())
 		self.iconRegistered = QtGui.QIcon(self.iconRegistering)
 		self.iconRegistered.addPixmap(QtGui.QPixmap(":/voip/interface/images/voip/internet-telephony_online.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-		print "self.ui.gridLayoutKeys.count:", self.ui.gridLayoutKeys.count()
+		print("self.ui.gridLayoutKeys.count:", self.ui.gridLayoutKeys.count())
 		for buttonIndex in range(self.ui.gridLayoutKeys.count()):
 			buttonLayoutItem = self.ui.gridLayoutKeys.itemAt(buttonIndex)
 			button = buttonLayoutItem.widget()
@@ -111,12 +111,12 @@ class pyvoipInterface(QtGui.QMainWindow):
 		
 	def elaborateCallDisconnected(self, urlCall):	
 		self.ui.labelVoipInfo.setText("Disconnected from sip:")
-		print "urlCall" + urlCall
+		print("urlCall" + urlCall)
 		self.ui.labelVoipDisplay.setText(urlCall)
 		QtCore.QTimer.singleShot(2000, self.pressHangupButton)
 	
 	def manageRegistration(self, verified):
-		print "manageRegistrated: ", verified
+		print("manageRegistrated: ", verified)
 		if verified:
 			self.ui.actionRegister.setIcon(self.iconRegistered)
 		else:
@@ -164,7 +164,7 @@ class pyvoipInterface(QtGui.QMainWindow):
 
 
 	def closeEvent(self, closeEvent):
-		print "voipInterfaceClose"
+		print("voipInterfaceClose")
 		self.voipSession.closeSession()
 		
 	

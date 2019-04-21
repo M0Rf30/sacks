@@ -26,9 +26,9 @@ The class is "pyvncInterface", which is used to create an Interface to a  VNC re
 
 
 import sys
-from PyQt4 import QtCore, QtGui
-from Ui_vncInterface import Ui_VncInterface
-from py_vncScreen import pyvncScreen
+from PyQt5 import QtCore, QtGui
+from .Ui_vncInterface import Ui_VncInterface
+from .py_vncScreen import pyvncScreen
 # from py_vncDialog import pyvncDialog
 class pyvncInterface(QtGui.QMainWindow):
 	def __init__(self, parent=None):
@@ -65,13 +65,13 @@ class pyvncInterface(QtGui.QMainWindow):
 						
 	def launch(self):
 		self.vncScreen.disconnect()
-		print "lauch screen"
+		print("lauch screen")
 		self.ui.actionConnectScreen.setChecked(True)
 	def stop(self):
 		
 		self.ui.actionConnectScreen.setChecked(False)
 	def connectScreen(self, abilitated):
-		print abilitated
+		print(abilitated)
 		if abilitated:
 			if not self.screenParameters:
 				self.setScreenParameters()

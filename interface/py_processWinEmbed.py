@@ -21,8 +21,8 @@
 
 
 import sys
-from PyQt4 import QtCore, QtGui
-from Ui_processWinEmbed import Ui_ProcessWinEmbed
+from PyQt5 import QtCore, QtGui
+from .Ui_processWinEmbed import Ui_ProcessWinEmbed
 
 class pyprocessWinEmbed(QtGui.QWidget):
 	def __init__(self, parent=None):
@@ -82,17 +82,17 @@ class pyprocessWinEmbed(QtGui.QWidget):
 			self.winIdCatchProcessOutput = self.winIdCatchProcessOutput + winIdCatchProcessOutput
 			startWinIDPos = self.winIdCatchProcessOutput.indexOf(self.commandProcessWin)
 			if startWinIDPos > 0:
-				print "startWinIDPos", startWinIDPos
+				print("startWinIDPos", startWinIDPos)
 				startWinIDPos = self.winIdCatchProcessOutput.lastIndexOf("Window", startWinIDPos)
-				print "startWinIDPos", startWinIDPos
+				print("startWinIDPos", startWinIDPos)
 				startWinIDPos = startWinIDPos + len("Window ")
-				print "startWinIDPos", startWinIDPos	
+				print("startWinIDPos", startWinIDPos)	
 				endWinIDPos = self.winIdCatchProcessOutput.indexOf(":", startWinIDPos)
 				if endWinIDPos > 0:
 					self.winIdStrHex = self.winIdCatchProcessOutput.mid(startWinIDPos, endWinIDPos - startWinIDPos)
 					# print "self.winId:", self.winId
 					self.winId
-					print "winIdInt:", self.winId
+					print("winIdInt:", self.winId)
 # 		if winIdCatchProcessOutput.contains
 					containerScreen = QtGui.QX11EmbedContainer(self.widgetScreen)
 				# self.containerScreen.setParent(self.widgetScreen)
@@ -104,7 +104,7 @@ class pyprocessWinEmbed(QtGui.QWidget):
 # 		
 	def manageWinIdCatchError(self):
 		winIdCatchProcessError = self.winIdCatchProcess.readAllStandardError()	
-		print "error: " + winIdCatchProcessError
+		print("error: " + winIdCatchProcessError)
 
 	def winIdCatchFinish(self):
 		if self.numCatch < self.maxNumCatch:
@@ -112,7 +112,7 @@ class pyprocessWinEmbed(QtGui.QWidget):
 				if self.catchProcess:
 					QtCore.QTimer.singleShot(300, lambda:self.embedWinProcess(self.catchProcess))
 					self.numCatch += 1
-					print "self.numCatch:", self.numCatch
+					print("self.numCatch:", self.numCatch)
 		
 		
 if __name__ == "__main__":

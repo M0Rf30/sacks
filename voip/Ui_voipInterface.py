@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file '/home/marcello/Documenti/sacks/sacksSvnUser/voip/voipInterface.ui'
 #
 # Created: Mon Dec 21 14:15:55 2009
-#      by: PyQt4 UI code generator 4.4.4
+#      by: PyQt5 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 class Ui_VoipInterface(object):
     def setupUi(self, VoipInterface):
@@ -441,7 +441,7 @@ class Ui_VoipInterface(object):
         self.actionHangup.setText(QtGui.QApplication.translate("VoipInterface", "Hangup", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setText(QtGui.QApplication.translate("VoipInterface", "About", None, QtGui.QApplication.UnicodeUTF8))
 
-import voip_rc
+from . import voip_rc
 
 if __name__ == "__main__":
     import sys

@@ -22,55 +22,55 @@
 
 # -*- coding: iso-8859-1 -*-
 import sys
-from web.web import webWidget
-from vnc.py_vncInterface import pyvncInterface
-from PyQt4 import QtCore, QtGui 
-from Ui_mainwindow import Ui_MainWindow
-from py_dialogsContainer import pydialogsContainer
+from .web.web import webWidget
+# from .vnc.py_vncInterface import pyvncInterface
+from PyQt5 import QtCore, QtGui, QtWidgets
+from .Ui_mainwindow import Ui_MainWindow
+from .py_dialogsContainer import pydialogsContainer
 
-class pymainWindow(QtGui.QMainWindow):
+class pymainWindow(QtWidgets.QMainWindow):
 	def __init__(self, media, parent=None):
-		QtGui.QMainWindow.__init__(self, parent)
+		QtWidgets.QMainWindow.__init__(self, parent)
 		self.ui = Ui_MainWindow()
 		self.ui.setupUi(self)
 		# self.tabifyDockWidget(self.ui.dockWidgetUser, self.ui.dockWidgetRoom)
 		self.tabifyDockWidget(self.ui.dockWidgetUser, self.ui.dockWidgetVoip)
 		self.tabifyDockWidget(self.ui.dockWidgetVoip, self.ui.dockWidgetRoom)
-		self.voipInterface = media["voip"]
+		# self.voipInterface = media["voip"]
 		# self.ui.dockWidgetVoip.resize(self.ui.dockWidgetVoip.height(), 200)
 		# self.voipInterface.setParent(self.ui.widgetVoip)
-		self.ui.layoutVoip.addWidget(self.voipInterface)
+		# self.ui.layoutVoip.addWidget(self.voipInterface)
 		# self.ui.dockWidgetUser.show()
-		self.mdi = QtGui.QWorkspace()
-		self.addToolBar(self.voipInterface.ui.toolBar)
-		self.ui.menuBar.addMenu(self.voipInterface.ui.menuVoip)
-		self.voipInterface.ui.menuBar.setVisible(False)
+		self.mdi = QtWidgets.QMdiArea()
+		#self.addToolBar(self.voipInterface.ui.toolBar)
+		#self.ui.menuBar.addMenu(self.voipInterface.ui.menuVoip)
+		#self.voipInterface.ui.menuBar.setVisible(False)
 		self.webWidget = webWidget(self)
 		self.addToolBar(self.webWidget.toolBar)
 		self.webWidget.toolBar.setVisible(False)
 		self.ui.menuBar.addMenu(self.webWidget.menuWeb)
 		self.webWidget.menuBar.setVisible(False)
 		self.deleteMdiWin = 1				
-		self.tabWidget = QtGui.QTabWidget()
+		self.tabWidget = QtWidgets.QTabWidget()
 		self.setCentralWidget(self.tabWidget)
 # 		self.tabWidget.addTab(self.mdi, 'VideoSlots')
 # 		self.tabWidget.addTab(self.webWidget, 'Web')
 		# self.remoteDesktopWinEmbed=pyprocessWinEmbed()
-		self.remoteDesktopInterface = pyvncInterface()
-		self.addToolBar(self.remoteDesktopInterface.toolBar)
+		# self.remoteDesktopInterface = pyvncInterface()
+		# self.addToolBar(self.remoteDesktopInterface.toolBar)
 		# self.remoteDesktopInterface.toolBar.setVisible(False)
-		self.ui.menuBar.addMenu(self.remoteDesktopInterface.menuRemoteScreen)
-		self.remoteDesktopInterface.menuBar.setVisible(False)
+		# self.ui.menuBar.addMenu(self.remoteDesktopInterface.menuRemoteScreen)
+		# self.remoteDesktopInterface.menuBar.setVisible(False)
 		# jid che detiente attualmente il remote desktop
 		
 
 		self.tabWidget.addTab(self.mdi, 'VideoSlots')
 		self.tabWidget.addTab(self.webWidget, 'Web')
-		self.tabWidget.addTab(self.remoteDesktopInterface, 'RemoteScreen')
-		self.streamSession = media["streamSession"]
-		self.streamSession.numWin = -1
-		self.mdi.addWindow(self.streamSession)
-		self.streamSession.hide()
+		# self.tabWidget.addTab(self.remoteDesktopInterface, 'RemoteScreen')
+		# self.streamSession = media["streamSession"]
+		# self.streamSession.numWin = -1
+		# self.mdi.addWindow(self.streamSession)
+		# self.streamSession.hide()
 		# Definizione del dialog container di configurazioni
 		self.configContainer = pydialogsContainer(self)
 		self.configContainer.addDialog(self.streamSession.streamDialog)
@@ -117,7 +117,7 @@ class pymainWindow(QtGui.QMainWindow):
 			QtCore.QObject.connect(self.sysTrayIcon, QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"), self.trayIconClick)
 			
 	def location(self, location):
-		print location
+		print(location)
 		
 		
 		
@@ -132,7 +132,7 @@ class pymainWindow(QtGui.QMainWindow):
 		self.streamDestination = streamDestination
 		
 	def tabActivate(self, tabNumber):
-		print tabNumber
+		print(tabNumber)
 		if tabNumber == 1:
 			self.webWidget.toolBar.setVisible(True)
 		else:
@@ -143,7 +143,7 @@ class pymainWindow(QtGui.QMainWindow):
 # 			self.remoteDesktopInterface.toolBar.setVisible(False)
 
 	def boxActivated(self, boxNumber):
-		print "boxActivated number: ", boxNumber
+		print("boxActivated number: ", boxNumber)
 		for mdiWin in self.mdi.windowList():
 			if mdiWin.numWin == boxNumber:
 				self.mdi.setActiveWindow(mdiWin)
@@ -165,7 +165,7 @@ class pymainWindow(QtGui.QMainWindow):
 		self.mdi.tile()
 		self.mdi.exactHeight = 0
 		for mdiWin in self.mdi.windowList():
-			print mdiWin.height(), mdiWin.width()
+			print(mdiWin.height(), mdiWin.width())
 			if mdiWin.height() < 1.1 * mdiWin.width() :
 				self.mdi.exactHeight = mdiWin.height()
 		
@@ -180,15 +180,15 @@ class pymainWindow(QtGui.QMainWindow):
 	def sendVideo(self, streamChecked):
 		
 		if self.streamSession and self.streamDestination:
-			print "streamChecked" + str(streamChecked)
+			print("streamChecked" + str(streamChecked))
 			if streamChecked:
 				streamInfoDict = {}
-				print 'sendVideo'
+				print('sendVideo')
 				self.streamSession.stop()
 				self.ui.actionSendDesktop.setChecked(False)
 				self.streamSession.numWin = -1
 			
-				print "streamDestination" + str(self.streamDestination)
+				print("streamDestination" + str(self.streamDestination))
 				streamInfoDict['streamDestination'] = self.streamDestination
 				streamInfoDict['streamContent'] = "acquisitionVideo"
 				self.streamSession.initialize(streamInfoDict)
@@ -203,18 +203,18 @@ class pymainWindow(QtGui.QMainWindow):
 	def sendDesktop(self, streamChecked):
 		if self.streamSession and self.streamDestination:
 			if streamChecked:
-				print 'sendDesktop'
+				print('sendDesktop')
 				streamInfoDict = {}
 				self.streamSession.stop()
 				self.ui.actionSendVideo.setChecked(False)
 				self.streamSession.numWin = -1
-				print "streamDestination" + str(self.streamDestination)
+				print("streamDestination" + str(self.streamDestination))
 				streamInfoDict['streamDestination'] = self.streamDestination
 			# "intellicom.eushells.net"
 				streamInfoDict['streamContent'] = "acquisitionDesktop"
 			
 				self.streamSession.initialize(streamInfoDict)
-				print "in mezzo"
+				print("in mezzo")
 				self.streamSession.start()
 
 				self.ui.actionVideoStream.setChecked(True)
@@ -249,7 +249,7 @@ class pymainWindow(QtGui.QMainWindow):
 	
 	def newWindow(self, userBox):
 		if userBox:
-			print "presenceUserBox" + str(self.ui.toolBox.indexOf(userBox))
+			print("presenceUserBox" + str(self.ui.toolBox.indexOf(userBox)))
 			# verifica per controllare se il widget percaso era gia' nel toolbox
 			if self.ui.toolBox.indexOf(userBox) == -1:
 				userBox.boxIndex = self.ui.toolBox.addItem(userBox, userBox.nameSlot)
@@ -259,7 +259,7 @@ class pymainWindow(QtGui.QMainWindow):
 				userBoxMdiWin.setWindowTitle(userBox.nameSlot)
 				self.numPlayer = self.numPlayer + 1
 			else: 
-				print "il toolBox era stato gia' occupato dal widget"
+				print("il toolBox era stato gia' occupato dal widget")
 
 
 	def delWindow(self, userBox):
@@ -289,17 +289,17 @@ class pymainWindow(QtGui.QMainWindow):
 	def setCurrentDock(self, dockWidget):
 		dockWidgetTitle = dockWidget.windowTitle()
 		dockWidgetKeyPosition = dockWidgetTitle.indexOf("&")
-		print "dockWidgetKeyPosition ", dockWidgetKeyPosition
+		print("dockWidgetKeyPosition ", dockWidgetKeyPosition)
 		if dockWidgetKeyPosition >= 0:
 			dockWidgetKey = dockWidgetTitle[dockWidgetKeyPosition + 1]
-			print "dockWidgetKey ", dockWidgetKey
+			print("dockWidgetKey ", dockWidgetKey)
 			# genera come evento il digitare la lettera scorciatoia nel titolo del dockWidget
 			keyEvent = QtGui.QKeyEvent(QtCore.QEvent.KeyPress, 0, QtCore.Qt.AltModifier, dockWidgetKey)
-			QtGui.QApplication.sendEvent(self, keyEvent);
+			QtGui.QApplication.sendEvent(self, keyEvent)
 			
 	def closeEvent(self, closeEvent):
 # 		self.mdi.closeAllWindows()	
-		print "closeEvent MainWindow"
+		print("closeEvent MainWindow")
 		self.streamSession.close()
 		self.voipInterface.close()
 		self.webWidget.close()
@@ -309,7 +309,7 @@ class pymainWindow(QtGui.QMainWindow):
 			userBox = self.ui.toolBox.widget(userBoxIndex)
 			userBox.closeEvent(0)
 		
-from stream.py_stream import pystream
+from .stream.py_stream import pystream
 # from stream.py_userSlot import pyuserSlot		
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)

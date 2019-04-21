@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file '/home/marcello/Documenti/sacks/sacksSvnUser/stream/user.ui'
 #
 # Created: Sat Mar  6 13:28:53 2010
-#      by: PyQt4 UI code generator 4.4.4
+#      by: PyQt5 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 class Ui_User(object):
     def setupUi(self, User):
@@ -159,7 +159,7 @@ class Ui_User(object):
         self.labelVolume.setText(QtGui.QApplication.translate("User", "Volume", None, QtGui.QApplication.UnicodeUTF8))
         self.muteFlag.setText(QtGui.QApplication.translate("User", "Mute", None, QtGui.QApplication.UnicodeUTF8))
 
-import stream_rc
+from . import stream_rc
 
 if __name__ == "__main__":
     import sys

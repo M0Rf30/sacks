@@ -1,11 +1,11 @@
 import sys
-from PyQt4 import QtCore, QtGui, QtNetwork
+from PyQt5 import QtCore, QtGui, QtNetwork
 
 
 class pyslotVlc(QtGui.QWidget):
 	def __init__(self, parent=None):
 		QtGui.QWidget.__init__(self, parent)
-		print "number"
+		print("number")
 		
 		self.a = QtGui.QWidget()
 		self.a.show()	
@@ -27,17 +27,17 @@ class pyslotVlc(QtGui.QWidget):
 		
 		
 	def socketManage(self):	
-		print "ciao"
+		print("ciao")
 		readMsg = self.tcpSocket.readAll()
-		print readMsg
-		print "len " + str(len(self.listCommands))
+		print(readMsg)
+		print("len " + str(len(self.listCommands)))
 		if len(self.listCommands):
 			commandVlc = self.listCommands.pop(0)
 			if readMsg[0:8] == "Password":
-				print self.tcpSocket.writeData(commandVlc)
+				print(self.tcpSocket.writeData(commandVlc))
 			else:
-				print commandVlc
-				print self.tcpSocket.writeData(commandVlc)
+				print(commandVlc)
+				print(self.tcpSocket.writeData(commandVlc))
 				
 			
 			

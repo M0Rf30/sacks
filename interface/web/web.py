@@ -28,13 +28,13 @@ The class is "webWidget", which is used to create an interface to web pages navi
 
 
 import sys
+from PyQt5 import QtCore, QtWebKit, QtGui, QtWidgets
+from PyQt5.QtPrintSupport import QPrinter
+from .Ui_web import Ui_webForm
 
-from PyQt4 import QtCore, QtGui, QtWebKit
-from Ui_web import Ui_webForm
 
 
-
-class webWidget(QtGui.QMainWindow):
+class webWidget(QtWidgets.QMainWindow):
 	def __init__(self, parent=None):
 		super(webWidget, self).__init__(parent)
 		self.ui = Ui_webForm()
@@ -46,7 +46,7 @@ class webWidget(QtGui.QMainWindow):
 		self.webSettings.setAttribute(QtWebKit.QWebSettings.JavaEnabled, True)
 
 		self.webMainFrame = self.webPage.mainFrame()
-		self.printer = QtGui.QPrinter()
+		self.printer = QPrinter()
 		self.menuWeb = self.ui.menuWeb
 		self.menuBar = self.ui.menuBar
 		self.toolBar = self.ui.toolBar
@@ -63,16 +63,16 @@ class webWidget(QtGui.QMainWindow):
 		self.ui.actionBack.setEnabled(False)
 		self.ui.actionNext.setEnabled(False)
 
-		QtCore.QObject.connect(self.ui.actionBack, QtCore.SIGNAL("triggered()"), self.back)
-		QtCore.QObject.connect(self.ui.actionNext, QtCore.SIGNAL("triggered()"), self.next)
-		QtCore.QObject.connect(self.ui.actionPrint, QtCore.SIGNAL("triggered()"), self.webPrint)
-		QtCore.QObject.connect(self.ui.actionPrintPreview, QtCore.SIGNAL("triggered()"), self.webPrintPreview)
-		QtCore.QObject.connect(self.ui.urlWeb, QtCore.SIGNAL("returnPressed()"), self.urlChanged)
-		QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("linkClicked (const QUrl&)"), self.linkClicked)
-		QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("urlChanged (const QUrl&)"), self.linkClicked)
-		QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("loadProgress (int)"), self.loadProgress)
-		QtCore.QObject.connect(self.ui.actionReload, QtCore.SIGNAL("triggered()"), self.reloadPage)
-		QtCore.QObject.connect(self.ui.actionStop, QtCore.SIGNAL("triggered()"), self.stopPage)
+		# QtCore.QObject.connect(self.ui.actionBack, QtCore.SIGNAL("triggered()"), self.back)
+		# QtCore.QObject.connect(self.ui.actionNext, QtCore.SIGNAL("triggered()"), self.__next__)
+		# QtCore.QObject.connect(self.ui.actionPrint, QtCore.SIGNAL("triggered()"), self.webPrint)
+		# QtCore.QObject.connect(self.ui.actionPrintPreview, QtCore.SIGNAL("triggered()"), self.webPrintPreview)
+		# QtCore.QObject.connect(self.ui.urlWeb, QtCore.SIGNAL("returnPressed()"), self.urlChanged)
+		# QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("linkClicked (const QUrl&)"), self.linkClicked)
+		# QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("urlChanged (const QUrl&)"), self.linkClicked)
+		# QtCore.QObject.connect(self.ui.webView, QtCore.SIGNAL("loadProgress (int)"), self.loadProgress)
+		# QtCore.QObject.connect(self.ui.actionReload, QtCore.SIGNAL("triggered()"), self.reloadPage)
+		# QtCore.QObject.connect(self.ui.actionStop, QtCore.SIGNAL("triggered()"), self.stopPage)
 		
 		QtCore.QMetaObject.connectSlotsByName(self)
 	
@@ -99,7 +99,7 @@ class webWidget(QtGui.QMainWindow):
 # 		"""
 # 		Stop loading the page
 # 		"""
-		print "stop"
+		print("stop")
 		self.ui.webView.stop()
 	
 # 	def title_changed(self, title):
@@ -161,7 +161,7 @@ class webWidget(QtGui.QMainWindow):
 		else:
 			self.ui.actionBack.setEnabled(False)
 	
-	def next(self):
+	def __next__(self):
 # 		"""
 # 		Next button clicked, go to next page
 # 		"""
@@ -179,7 +179,7 @@ class webWidget(QtGui.QMainWindow):
 		
 	def closeEvent(self, closeEvent):
 		self.ui.webView.setUrl(QtCore.QUrl(""))
-		print "webClose"
+		print("webClose")
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
 	myapp = webWidget()

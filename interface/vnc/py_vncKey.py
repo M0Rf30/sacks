@@ -23,7 +23,7 @@
 """
 
 # -*- coding: utf-8 -*-
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 key = {}
 
 key[QtCore.Qt.Key_Escape] = 0xff1b

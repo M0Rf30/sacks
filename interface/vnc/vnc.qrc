@@ -1,5 +1,5 @@
 <RCC>
   <qresource prefix="vnc" >
-    <file>../images/vnc/rfbdrake.png</file>
+	    <file>../images/actions/forward.png</file>
   </qresource>
 </RCC>

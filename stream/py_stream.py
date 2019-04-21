@@ -27,34 +27,34 @@ The class is "pystream" that import the module "vlc" and set instances for multi
 """
 
 import sys
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-import vlc
+from . import vlc
 # from py_streamDialog import pystreamDialog
 
-class pystream(QtGui.QWidget):
+class pystream(QtWidgets.QWidget):
 	def __init__(self, streamDialog=None, parent=None):
-		QtGui.QWidget.__init__(self, parent)
+		QtWidgets.QWidget.__init__(self, parent)
 		self.setMinimumSize(160, 120)
 		self.statusPlayer = 0
 		self.streamDialog = streamDialog
 		self.playerInitialized = 0
-		vlcVersionString = QtCore.QString(vlc.libvlc_get_version())
-		vlcVersion, ok = vlcVersionString[0:3].toFloat()		
-		if ok:
-			self.vlcVersion = vlcVersion
-		else:
-			print "vlcVersion not recognized"
-			exit()		
-		print "vlcVersion: ", self.vlcVersion   
-		if self.vlcVersion >= 1:
-			if sys.platform == "win32":
-				currentPath = QtCore.QDir.toNativeSeparators(QtCore.QDir.currentPath ())
-				sessionPlugin = str(currentPath) + "\plugins"
-				print "sessionPlugin", sessionPlugin
-				self.vlcInstance = vlc.Instance(["--plugin-path", sessionPlugin])
-			else:
-				self.vlcInstance = vlc.Instance()
+		#vlcVersionString = QtCore.QString(vlc.libvlc_get_version())
+		#vlcVersion, ok = float(vlcVersionString[0:3])		
+		# if ok:
+		# 	self.vlcVersion = vlcVersion
+		# else:
+		# 	print("vlcVersion not recognized")
+		# 	exit()		
+		# print("vlcVersion: ", self.vlcVersion)   
+		# if self.vlcVersion >= 1:
+		# 	if sys.platform == "win32":
+		# 		currentPath = QtCore.QDir.toNativeSeparators(QtCore.QDir.currentPath ())
+		# 		sessionPlugin = str(currentPath) + "/plugins"
+		# 		print("sessionPlugin", sessionPlugin)
+		# 		self.vlcInstance = vlc.Instance(["--plugin-path", sessionPlugin])
+		# 	else:
+		# 		self.vlcInstance = vlc.Instance()
 # 	def mediaHasVideoOut(self):				
 # 		if self.statusPlayer:
 # 			if self.mediaPlayer.has_vout():
@@ -64,12 +64,12 @@ class pystream(QtGui.QWidget):
 # 				return False
 
 	def initialize(self, streamInfoDict):
-		print streamInfoDict
+		print(streamInfoDict)
 		self.streamInfoDict = streamInfoDict
 		# controlla se deve prelevare delle impostazioni dal dialog
 		if self.streamDialog:
 			dialogStreamParameters = self.streamDialog.returnParameters()
-			print "dialogStreamParameters:  ........       ", dialogStreamParameters
+			print("dialogStreamParameters:  ........       ", dialogStreamParameters)
 		else:
 			dialogStreamParameters = None
 		if(streamInfoDict['streamContent']):
@@ -114,7 +114,7 @@ class pystream(QtGui.QWidget):
 				if self.vlcVersion >= 1:
 						parameters.append("--input-slave=oss://" + inputAudioDevice)
 			
-			if(streamInfoDict.has_key('streamDestination')):
+			if('streamDestination' in streamInfoDict):
 				if (streamInfoDict['streamDestination']):
 					if  dialogStreamParameters:
 						videoBitrate = "vb=" + str(dialogStreamParameters["videoBitrate"]) + ", "
@@ -130,7 +130,7 @@ class pystream(QtGui.QWidget):
 					
 					parameters.append("--sout=" + sessionTranscode + sessionDuplicate)
 				else:
-					print "Parametro streaming destinatario mancante"
+					print("Parametro streaming destinatario mancante")
 			else:
 # anche per sola lettura di uno stream o di una qualunque cosa e' importante settare il duplicate perche' accade che lui invia a casaccio sui passati duplicate qualunque cosa legge di nuovo;
 # pertanto faccio un duplicate che lo inizializza su una porta sicura 1233.
@@ -140,8 +140,8 @@ class pystream(QtGui.QWidget):
 					parameters.append(sessionDuplicate)
 			
 
-			print "parameters"
-			print parameters
+			print("parameters")
+			print(parameters)
 			
 # 			self.playerVolume=50
 # 			
@@ -153,7 +153,7 @@ class pystream(QtGui.QWidget):
 			
 			if(streamInfoDict['streamContent'] == "acquisitionVideo") :
 				if sys.platform == 'win32':
-					playUrl = ur"dshow:// :dshow-size=320x240"
+					playUrl = r"dshow:// :dshow-size=320x240"
 				else:
 					if dialogStreamParameters:
 						video4linuxType = str(dialogStreamParameters["video4linuxType"]) + "://"
@@ -161,42 +161,40 @@ class pystream(QtGui.QWidget):
 						video4linuxType = "v4l2://"
 					playUrl = video4linuxType + inputVideoDevice + ":width=320:height=240"
 			elif(streamInfoDict['streamContent'] == "acquisitionDesktop"):
-				playUrl = ur"screen://"
+				playUrl = r"screen://"
 			else:
 				playUrl = streamInfoDict['streamContent']
 			
-			print "playUrl: ", playUrl
-			# casting per supportare il formato in windows
-			winId = int(self.winId())
+			print("playUrl: ", playUrl)
 			
-			if self.vlcVersion < 1:
-				self.player = vlc.MediaControl(parameters)
-				self.mediaPlayer = self.player.get_media_player()
-				print "####### playUrl: " + playUrl
-				self.player.set_mrl(playUrl)
-				self.player.set_visual(winId)
-			else:
-				self.media = self.vlcInstance.media_new(playUrl)
-				self.player = self.media.player_new_from_media()
-				if sys.platform == "win32":
-					self.player.set_hwnd(winId)
-				else:	
-					self.player.set_xwindow(winId)
+		# 	if self.vlcVersion < 1:
+		# 		self.player = vlc.MediaControl(parameters)
+		# 		self.mediaPlayer = self.player.get_media_player()
+		# 		print("####### playUrl: " + playUrl)
+		# 		self.player.set_mrl(playUrl)
+		# 		self.player.set_visual(winId)
+		# 	else:
+		# 		self.media = self.vlcInstance.media_new(playUrl)
+		# 		self.player = self.media.player_new_from_media()
+		# 		if sys.platform == "win32":
+		# 			self.player.set_hwnd(winId)
+		# 		else:	
+		# 			self.player.set_xwindow(winId)
 					
-				for option in parameters:	
-					self.media.add_option(option[2:])
+		# 		for option in parameters:	
+		# 			self.media.add_option(option[2:])
 					
-			self.playerInitialized = 1	
+		# 	self.playerInitialized = 1	
 
-		else:
-			print "media to read not found"
+		# else:
+		# 	print("media to read not found")
 			
 
 
 
 	def start(self):
-		print "inizializer"
-		print self.playerInitialized
+		print("inizializer")
+		print(self.playerInitialized)
 		if self.playerInitialized:
 			if self.vlcVersion < 1:
 				self.player.start(0)
@@ -214,17 +212,17 @@ class pystream(QtGui.QWidget):
 				self.statusPlayer = 1
 				self.playerInitialized = 0
 			else:
-				print "vlcStream not initialized"
+				print("vlcStream not initialized")
 
 	def stop(self):
-		print "stop vlc"
+		print("stop vlc")
 		if self.statusPlayer:
-			print "ciao"
+			print("ciao")
 # modificato per prova
 			self.player.stop()
-			print  "dopociao"
+			print("dopociao")
 			self.statusPlayer = 0
-			print "stop" + str(self.statusPlayer)
+			print("stop" + str(self.statusPlayer))
 
 		
 	def setVolume(self, vol):
@@ -245,7 +243,7 @@ class pystream(QtGui.QWidget):
 				if self.mediaPlayer.has_vout():
 					self.player.display_text("MuteOn", 0, 2000)
 			else:
-				print self.playerVolume
+				print(self.playerVolume)
 				self.playerVolume = self.player.sound_set_volume(self.playerVolume)
 				if self.mediaPlayer.has_vout():
 					self.player.display_text("MuteOff", 0, 2000)
@@ -256,7 +254,7 @@ class pystream(QtGui.QWidget):
 # 			self.player.exit()
 		self.emit(QtCore.SIGNAL('closeEmitApp()'))
 # 			self.close()
-		print "exit VLC"
+		print("exit VLC")
 		
 
 		
@@ -283,7 +281,7 @@ if __name__ == "__main__":
 # 	InfoDict['streamContent']=ur"http://192.168.0.4:8080"
 # 	InfoDict['streamContent']=ur"acquisitionVideo"
 # 	InfoDict['streamContent']=ur"/home/marcello/fant.mpg"
-	InfoDict['streamContent'] = ur"acquisitionDesktop"
+	InfoDict['streamContent'] = r"acquisitionDesktop"
 # 	InfoDict['streamDestination']="192.168.0.4:1234"
 	# InfoDict['streamContent']=ur"acquisitionDesktop"
 	mainpymplayer.initialize(InfoDict)
@@ -291,7 +289,7 @@ if __name__ == "__main__":
 	mainpymplayer2 = pystream()
 	mainpymplayer2.show()
 # 	InfoDict2['streamContent']=ur"/home/marcello/fant.mpg"
-	InfoDict2['streamContent'] = ur"acquisitionVideo"
+	InfoDict2['streamContent'] = r"acquisitionVideo"
 	InfoDict2['streamDestination'] = "192.168.0.4:1234"
 	mainpymplayer2.initialize(InfoDict2)
 	

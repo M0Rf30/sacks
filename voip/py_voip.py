@@ -27,7 +27,7 @@ create a voip instance. From this instance, you can then register an account, ma
 """
 
 
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 import sys
 import pjsua as pj
 
@@ -40,7 +40,7 @@ class voipAccountCallback(pj.AccountCallback, QtCore.QObject):
 		QtCore.QObject.__init__(self, parent)
 
 	def on_incoming_call(self, call):
-		print "call ", call
+		print("call ", call)
 		callCallBack = voipCallCallback(call)
 		call.set_callback(callCallBack)
 		call.callCallBack = callCallBack		
@@ -51,8 +51,8 @@ class voipCallCallback(pj.CallCallback, QtCore.QObject):
 	def __init__(self, call=None, parent=None):
 		pj.CallCallback.__init__(self, call)
 		QtCore.QObject.__init__(self, parent)
-		print "call :", call
-		print "self.call", self.call
+		print("call :", call)
+		print("self.call", self.call)
 		self.call = call
 		self.callInfo = {}
 	# Notification when call state has changed
@@ -76,9 +76,9 @@ class voipCallCallback(pj.CallCallback, QtCore.QObject):
 			callSlot = callInfo.conf_slot
 			pj.Lib.instance().conf_connect(callSlot, 0)
 			pj.Lib.instance().conf_connect(0, callSlot)
-			print "Media is now active"
+			print("Media is now active")
 		else:
-			print "Media is inactive"
+			print("Media is inactive")
 
 class pyvoip(QtCore.QObject):
 	def __init__(self, stunServer="", parent=None):
@@ -88,7 +88,7 @@ class pyvoip(QtCore.QObject):
 		self.voipAccountLogin = ""
 		self.voipAccountPasswd = ""
 		self.voipStunServer = stunServer
-		print "self.voipStunServer", self.voipStunServer
+		print("self.voipStunServer", self.voipStunServer)
 		self.registered = False
 		self.accountVoip = None
 		self.currentCall = None
@@ -106,32 +106,32 @@ class pyvoip(QtCore.QObject):
 				self.libVoip.init(log_cfg=pj.LogConfig(level=LOG_LEVEL, callback=self.logCallBack))
 # 			self.libVoip.init( log_cfg = pj.LogConfig(level=LOG_LEVEL,  callback=self.logCallBack))
 		# lib.init(ua_cfg=my_ua_cfg, media_cfg=my_media_cfg)
-		except pj.Error, err:
-			print 'Initialization error:', err
+		except pj.Error as err:
+			print('Initialization error:', err)
 
-		print "create_transport"
+		print("create_transport")
 		try:
 			self.transportVoip = self.libVoip.create_transport(pj.TransportType.UDP, pj.TransportConfig(5060))
 			self.libVoip.start()
-			print "\nListening on", self.transportVoip.info().host,
-			print "port", self.transportVoip.info().port, "\n"
+			print("\nListening on", self.transportVoip.info().host, end=' ')
+			print("port", self.transportVoip.info().port, "\n")
 			currentPath = QtCore.QDir.currentPath()
 			if sys.platform == "win32":
 				ringTonePath = str(currentPath) + "/tools/sounds/phone_incoming_call.wav"    
 			else:
 				ringTonePath = str(currentPath) + "/tools/sounds/phone_incoming_call.wav"
-				print "ringTonePath ", ringTonePath
+				print("ringTonePath ", ringTonePath)
 			wavId = self.libVoip.create_player(ringTonePath, True)
-			print "wav player id ", wavId
+			print("wav player id ", wavId)
 			self.ringSlot = self.libVoip.player_get_slot(wavId)
-			print "playerSlot ", self.ringSlot
+			print("playerSlot ", self.ringSlot)
 		
 		except:
-			print "Address Voip already in use"
+			print("Address Voip already in use")
 		
 		
 	def registerVoip(self, hostVoipProvider, voipAccountLogin, voipAccountPasswd):
-		print "register: " , hostVoipProvider, " ", voipAccountLogin, " ", voipAccountPasswd
+		print("register: " , hostVoipProvider, " ", voipAccountLogin, " ", voipAccountPasswd)
 		if self.transportVoip:
 			if not self.registered:
 				self.hostVoipProvider = str(hostVoipProvider)
@@ -152,7 +152,7 @@ class pyvoip(QtCore.QObject):
 		self.registered = False
 
 	def manageIncomingCall(self, call):
-		print "Incoming call from ", call.info().remote_uri
+		print("Incoming call from ", call.info().remote_uri)
 		if self.currentCall:
 			call.answer(486, "Busy")
 			return
@@ -176,7 +176,7 @@ class pyvoip(QtCore.QObject):
 # 		lastReason=self.currentCallInfo.last_reason
 # 		#print "self.currentCall ", self.currentCall
 # 		urlCall=QtCore.QString(self.currentCallInfo.remote_uri).remove("<").remove("sip:").remove(">")
-		print "infoState ", infoState, "lastCode ", lastCode, "lastReason ", lastReason 
+		print("infoState ", infoState, "lastCode ", lastCode, "lastReason ", lastReason) 
 		if infoState == "DISCONNCTD":
 			self.libVoip.conf_disconnect(self.ringSlot, 0)	
 			# QtCore.QObject.disconnect(self.currentCall.callCallBack, QtCore.SIGNAL("stateCallChanged"), self.manageStatusChanged)
@@ -188,26 +188,26 @@ class pyvoip(QtCore.QObject):
 		if infoState == "EARLY" and lastCode == 180:
 			self.emit(QtCore.SIGNAL('callRequest'), urlCall)
 			self.libVoip.conf_connect(self.ringSlot, 0)
-		print "manageStatusChanged"
+		print("manageStatusChanged")
 		
 		
 	def makeCall(self, voipUrl):
 		if not self.currentCall:
 			if self.registered:
 				try:
-					print "Making call to", voipUrl
+					print("Making call to", voipUrl)
 					# self.currentCall=self.accountVoip.make_call(voipUrl, cb=MyCallCallback())
 					callCallBack = voipCallCallback()
 					call = self.accountVoip.make_call(voipUrl, callCallBack)
 					call.callCallBack = callCallBack
 					QtCore.QObject.connect(call.callCallBack, QtCore.SIGNAL("stateCallChanged()"), self.manageStatusChanged)
 					self.currentCall = call
-				except pj.Error, e:
-					print "Exception: " + str(e)
+				except pj.Error as e:
+					print("Exception: " + str(e))
 			else:
-				print "voip non registrato"
+				print("voip non registrato")
 		else: 
-			print "Already have another call"
+			print("Already have another call")
 		return self.currentCall
 
 	def closeSession(self):
@@ -225,7 +225,7 @@ class pyvoip(QtCore.QObject):
 			# QtCore.QObject.disconnect(self.currentCall.callCallBack, QtCore.SIGNAL("stateCallChanged"), self.manageStatusChanged)
 			# self.currentCall=None
 		else:
-			print "There is no call!"
+			print("There is no call!")
 			
 	def answer(self):
 		if self.currentCall:
@@ -233,7 +233,7 @@ class pyvoip(QtCore.QObject):
 			
 			
 	def logCallBack(self, level, string, lenght):
-		print "log_cb:", str,
+		print("log_cb:", str, end=' ')
 		logVoip = QtCore.QString(str)
 		if logVoip.contains("registration success"):
 			self.emit(QtCore.SIGNAL("voipRegistrated(bool)"), True)

@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file '/home/marcello/Documenti/sacks/sacksSvnUser/interface/vnc/vncInterface.ui'
 #
 # Created: Thu Dec 17 23:59:49 2009
-#      by: PyQt4 UI code generator 4.4.4
+#      by: PyQt5 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 class Ui_VncInterface(object):
     def setupUi(self, VncInterface):
@@ -57,7 +57,7 @@ class Ui_VncInterface(object):
         self.toolBar.setWindowTitle(QtGui.QApplication.translate("VncInterface", "RemoteScreen ToolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConnectScreen.setText(QtGui.QApplication.translate("VncInterface", "Connect Screen", None, QtGui.QApplication.UnicodeUTF8))
 
-import vnc_rc
+from . import vnc_rc
 
 if __name__ == "__main__":
     import sys

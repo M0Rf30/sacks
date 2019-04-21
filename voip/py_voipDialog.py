@@ -21,8 +21,8 @@
 
 
 import sys
-from PyQt4 import QtCore, QtGui
-from Ui_voipWidget import Ui_voipWidget
+from PyQt5 import QtCore, QtGui
+from .Ui_voipWidget import Ui_voipWidget
 
 
 class pyvoipDialog(QtGui.QDialog):
@@ -86,13 +86,13 @@ class pyvoipDialog(QtGui.QDialog):
 			self.settings.setValue("voip/sipAccountPasswd", QtCore.QVariant(self.voipParameters["sipAccountPasswd"]))
 			self.settings.setValue("voip/sipStunServer", QtCore.QVariant(self.voipParameters["sipStunServer"]))
 		
-			print "sipProvider: " + self.voipParameters["sipProvider"]
-			print "sipAccountUser: " + self.voipParameters["sipAccountUser"]
-			print "sipAccountPasswd: " + self.voipParameters["sipAccountPasswd"]
-			print "sipStunServer: " + self.voipParameters["sipStunServer"]
+			print("sipProvider: " + self.voipParameters["sipProvider"])
+			print("sipAccountUser: " + self.voipParameters["sipAccountUser"])
+			print("sipAccountPasswd: " + self.voipParameters["sipAccountPasswd"])
+			print("sipStunServer: " + self.voipParameters["sipStunServer"])
 	
 	def showEvent(self, showEvent):
-		print "showEvent"
+		print("showEvent")
 		self.ui.lineEditSipProvider.setText(self.voipParameters["sipProvider"])
 		self.ui.lineEditSipAccountUser.setText(self.voipParameters["sipAccountUser"])
 		self.ui.lineEditSipAccountPasswd.setText(self.voipParameters["sipAccountPasswd"])

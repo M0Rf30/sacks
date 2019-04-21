@@ -1,4 +1,4 @@
-#!/usr/bin/env python2 
+#!/usr/bin/env python
 #
 # Sacks: a video conference-meeting system
 # Copyright (C) 2009 Associazione Intellicom
@@ -30,24 +30,24 @@ The class is "pyriunioni", which is used to authenticate, create jabber comunica
 
 # -*- coding: iso-8859-1 -*-
 import sys
-from PyQt4 import QtCore, QtGui, QtNetwork
+from PyQt5 import QtCore, QtGui, QtNetwork, QtWidgets
 from interface.py_mainWindow import pymainWindow
-from jabber.py_jabber import pyjabber
+# from jabber.py_jabber import pyjabber
 from stream.py_stream import pystream
 from stream.py_streamDialog import pystreamDialog
 from py_userBox import pyuserBox
-from jabber.Ui_xmppDialog import Ui_xmppDialog
+# from jabber.Ui_xmppDialog import Ui_xmppDialog
 from translations import translations_rc
-from voip.py_voipInterface import pyvoipInterface
-class pyriunioni(QtGui.QMainWindow):
+#from voip.py_voipInterface import pyvoipInterface
+class pyriunioni(QtWidgets.QMainWindow):
 
 	def __init__(self, parent=None):
-		QtGui.QMainWindow.__init__(self, parent)
+		QtWidgets.QMainWindow.__init__(self, parent)
 		self.settings = QtCore.QSettings("Intellicom", "Sacks")
 		self.media = {}
-		streamDialog = pystreamDialog(self.settings)
-		self.media["streamSession"] = pystream(streamDialog)
-		self.media["voip"] = pyvoipInterface(self.settings, self)
+		# streamDialog = pystreamDialog(self.settings)
+		#self.media["streamSession"] = pystream(streamDialog)
+		#self.media["voip"] = pyvoipInterface(self.settings, self)
 		self.interfaceGui = pymainWindow(self.media)
 		self.usersRoomList = {}
 		
@@ -67,7 +67,7 @@ class pyriunioni(QtGui.QMainWindow):
 
 		licenceFile = QtCore.QFile("COPYING")
 		if not licenceFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text):	
-			print "missing license"
+			print("missing license")
 			exit()
 		self.licenseText = QtCore.QString(licenceFile.readAll())
 		
@@ -86,7 +86,7 @@ class pyriunioni(QtGui.QMainWindow):
 		QtCore.QObject.connect(self.interfaceGui, QtCore.SIGNAL("msgOut"), self.sendJabberRoom)
 
 # definizione jabber con le sue connessioni
-		self.jabberUser = pyjabber(self)
+		# self.jabberUser = pyjabber(self)
 		# self.elabCommand=pyelabCommand(self.jabberUser, self.usersList, self.usersRoomList)
 		QtCore.QObject.connect(self.jabberUser, QtCore.SIGNAL("jabberMessage"), self.menageIncomingJabberMsg)
 		QtCore.QObject.connect(self.jabberUser, QtCore.SIGNAL("fileIncomingRequest"), self.menageJabberFileIncomingRequest)
@@ -104,10 +104,10 @@ class pyriunioni(QtGui.QMainWindow):
 		
 
 	def connJabber(self, connection):
-		print "def connJabber(self,  connection):"
+		print("def connJabber(self,  connection):")
 		if connection:
 			self.xmppDialog = QtGui.QDialog()
-			self.xmppDialog.ui = Ui_xmppDialog()
+			# self.xmppDialog.ui = Ui_xmppDialog()
 			self.xmppDialog.ui.setupUi(self.xmppDialog)
 			self.xmppDialog.show()
 			self.xmppDialog.setWindowModality(QtCore.Qt.NonModal)
@@ -122,11 +122,11 @@ class pyriunioni(QtGui.QMainWindow):
 				if self.jabberUser.connected > 0:
 					self.chairMode(False)
 					self.jabberUser.xmppDisconnect()
-				print "disconnect"
+				print("disconnect")
 				self.interfaceGui.ui.lineEditRoomMsg.clear()
 				self.interfaceGui.ui.lineEditRoomMsg.setEnabled(False)
-				for userJid, userBox in self.usersList.iteritems():
-					if self.usersRoomList.has_key(userJid) and userJid != self.userJid:
+				for userJid, userBox in self.usersList.items():
+					if userJid in self.usersRoomList and userJid != self.userJid:
 						userBox.presenceServer(False)
 					else:	
 						userBox.close()
@@ -145,18 +145,18 @@ class pyriunioni(QtGui.QMainWindow):
 		self.clientParameters["jidUser"] = self.clientParameters["user"] + "@" + self.clientParameters["urlServer"]
 		self.userJid = self.clientParameters["jidUser"]
 		self.settings.setValue("jabber/user", QtCore.QVariant(self.clientParameters["user"]))
-		print "User: ", str(self.xmppDialog.ui.lineEditUser.text())
+		print("User: ", str(self.xmppDialog.ui.lineEditUser.text()))
 		self.clientParameters["passwdUser"] = str(self.xmppDialog.ui.lineEditPassword.text())
 		userJidParams = {}
 		userJidParams["jid"] = self.clientParameters["jidUser"]
 		userJidParams["password"] = str(QtCore.QCryptographicHash.hash(self.clientParameters["passwdUser"], QtCore.QCryptographicHash.Md5).toHex())
-		print "jabber md5 password: ", userJidParams["password"]
+		print("jabber md5 password: ", userJidParams["password"])
 		self.jabberUser.auth(userJidParams)
 		self.interfaceGui.setWindowTitle(self.clientParameters["jidUser"])
 
 	def connection(self, connected):
-		print "parent" + str(self.parent())
-		print "connected: " + str(connected)
+		print("parent" + str(self.parent()))
+		print("connected: " + str(connected))
 		if connected == 1:
 			# icona per lo stato di on che ora diventa connesso
 			self.interfaceGui.ui.actionConnection.setIcon(self.interfaceGui.iconConnected)
@@ -183,9 +183,9 @@ class pyriunioni(QtGui.QMainWindow):
 			
 		
 	def menageIncomingJabberMsg(self, msgJid, msgType, msgIncoming):
-		print "Incoming Msg from: " + msgJid + " : " + msgIncoming			
+		print("Incoming Msg from: " + msgJid + " : " + msgIncoming)			
 		jidMsgReceived = QtCore.QString(msgJid)
-		msgReceived = QtCore.QString(unicode(msgIncoming))
+		msgReceived = QtCore.QString(str(msgIncoming))
 		if self.chairModeStatus:			
 			if jidMsgReceived != self.clientParameters["jidServer"]:
 				typeCommand = msgReceived.left(1)
@@ -203,7 +203,7 @@ class pyriunioni(QtGui.QMainWindow):
 				else:
 					self.elaborateMsgForUser(jidMsgReceived, msgReceived)
 			elif jidMsgReceived == self.clientParameters["jidServer"]:
-				msgReceived = QtCore.QString(unicode(msgIncoming))
+				msgReceived = QtCore.QString(str(msgIncoming))
 				if msgIncoming:
 					if typeCommand == "S":
 						msgCommand = msgReceived.mid(1)
@@ -213,11 +213,11 @@ class pyriunioni(QtGui.QMainWindow):
 					self.elaborateMsgForUser(jidMsgReceived, msgReceived)
 				
 	def elaborateMsgForUser(self, jidMsgIncoming, msgIncoming):
-		print "command for user"
+		print("command for user")
 		jidMsgIncomingName = jidMsgIncoming.left(jidMsgIncoming.indexOf("@"))
-		msgReceived = QtCore.QString(unicode(msgIncoming))
+		msgReceived = QtCore.QString(str(msgIncoming))
 		stringMsgShow = jidMsgIncomingName + ": " + msgReceived
-		if self.usersList.has_key(str(jidMsgIncoming)):
+		if str(jidMsgIncoming) in self.usersList:
 			userBox = self.usersList[str(jidMsgIncoming)]
 			if msgIncoming:
 				userBox.showMsg(stringMsgShow, True)
@@ -239,15 +239,15 @@ class pyriunioni(QtGui.QMainWindow):
 
 
 	def elaboratePresence(self, jid, jidInfo, jidStatusInfo):
-		print "jidPresence: " + jid + " jidInfo: " + jidInfo
-		print self.usersList
-		print "***********"
-		print self.usersRoomList
+		print("jidPresence: " + jid + " jidInfo: " + jidInfo)
+		print(self.usersList)
+		print("***********")
+		print(self.usersRoomList)
 		if jid:
 			if jidInfo == "available":				
-				if  self.usersList.has_key(jid):
+				if  jid in self.usersList:
 					userBox = self.usersList[jid]					
-				elif self.usersRoomList.has_key(jid):
+				elif jid in self.usersRoomList:
 					userBox = self.usersRoomList[jid]
 					self.usersList[jid] = userBox
 				else:
@@ -255,11 +255,11 @@ class pyriunioni(QtGui.QMainWindow):
 					self.usersList[jid] = userBox
 				userBox.presence(True)
 				if self.chairModeStatus:
-					if self.usersRoomList.has_key(jid):						
+					if jid in self.usersRoomList:						
 						if jid != self.clientParameters["jidChair"]:				
 							userBox = self.usersRoomList[jid]
 							userBox.presenceServer(True)
-							print "userBox.presence in elaboratePresence"
+							print("userBox.presence in elaboratePresence")
 				else: 
 									
 					self.interfaceGui.newWindow(userBox)
@@ -271,14 +271,14 @@ class pyriunioni(QtGui.QMainWindow):
 			elif 	jidInfo == "unavailable":
 				# caso chair Mode: l'utente non e' piu' presente, viene solo segnalato come assente
 				if self.chairModeStatus:
-					if self.usersRoomList.has_key(jid):
+					if jid in self.usersRoomList:
 						if jid != self.clientParameters["jidChair"]:
 							userBox = self.usersRoomList[jid]
 							userBox.presenceServer(False)
 
 				else:	
 				# caso uuse normale: l'utente viene tolto dalla lista degli user e levato dalla mostra nel toolbox	
-					if self.usersList.has_key(jid):
+					if jid in self.usersList:
 						userBox = self.usersList[jid]
 						userSlot = userBox.userSlot
 						self.interfaceGui.delWindow(userBox)
@@ -290,7 +290,7 @@ class pyriunioni(QtGui.QMainWindow):
 						if jid == self.clientParameters["jidChair"]:
 							self.connectedChair = False
 							self.interfaceGui.ui.labelLinkToServer.setPixmap(QtGui.QPixmap(""))
-							for userBox in self.usersList.iteritems():
+							for userBox in self.usersList.items():
 								userSlot = userBox.userSlot
 								userSlot.ui.labelonGuiShow.setPixmap(QtGui.QPixmap(""))
 								userBox.info["roomPresence"] = False
@@ -306,21 +306,21 @@ class pyriunioni(QtGui.QMainWindow):
 		userSlot.updateInterface(item, value)
 		
 	def elabCommandFromChair(self, jid, msg):
-		print "command from chair"
+		print("command from chair")
 # self.clientParameters["jidChair"] e' sicuramente stato attivato altrimenti qui' nn vi arriva		
-		msgCommand = QtCore.QString(unicode(msg))
+		msgCommand = QtCore.QString(str(msg))
 		commandList = msgCommand.split(" ")
 		command = commandList.first()
 		parametersList = commandList.mid(1)
 
 		if jid == self.clientParameters["jidChair"] and command == "/addRoomUser":
 			roomUser = str(parametersList.first())
-			if not self.usersList.has_key(roomUser):
+			if roomUser not in self.usersList:
 				if roomUser != self.clientParameters["jidUser"]:
 					userBox = pyuserBox(roomUser, self.clientParameters["jidServer"], self.jabberUser, self.interfaceGui)
 					self.usersList[roomUser] = userBox
 					self.jabberUser.subscriptionRequestSend(roomUser)
-					print "subscriptionRequestSend: " + roomUser
+					print("subscriptionRequestSend: " + roomUser)
 			else:
 				userBox = self.usersList[roomUser]
 			userBox.presenceRoom(True)
@@ -328,7 +328,7 @@ class pyriunioni(QtGui.QMainWindow):
 		if jid == self.clientParameters["jidChair"] and command == "/userFocus":
 			userFocusJid = str(parametersList.takeFirst())
 			userFocusStatus = str(parametersList.takeFirst())
-			if self.usersList.has_key(userFocusJid):
+			if userFocusJid in self.usersList:
 				userBox = self.usersList[userFocusJid]
 				if userFocusStatus == "True":
 					self.focusStatus = True
@@ -349,7 +349,7 @@ class pyriunioni(QtGui.QMainWindow):
 		if jid == self.clientParameters["jidChair"] and command == "/remoteDesktop":
 			jidRemoteDesktop = str(parametersList.takeFirst())
 			remoteScreenStatus = str(parametersList.takeFirst())
-			if self.usersList.has_key(jidRemoteDesktop):
+			if jidRemoteDesktop in self.usersList:
 				userBox = self.usersList[jidRemoteDesktop]
 				if remoteScreenStatus == "True":
 					self.remoteDesktopStatus = True
@@ -360,7 +360,7 @@ class pyriunioni(QtGui.QMainWindow):
 					addressRemoteDesktop = str(parametersList.takeFirst())
 					display = int(parametersList.takeFirst())
 					passwd = str(parametersList.takeFirst())
-					print "userbox.online: ", userBox.nameSlot, " online= ", userBox.online  
+					print("userbox.online: ", userBox.nameSlot, " online= ", userBox.online)  
 					userBox.setScreenParameters(addressRemoteDesktop, display, passwd)
 					self.jidRemoteDesktop = jidRemoteDesktop
 				else:
@@ -372,7 +372,7 @@ class pyriunioni(QtGui.QMainWindow):
 		if jid == self.clientParameters["jidChair"] and command == "/newRoomUser":
 			roomUser = str(parametersList.first())
 			if roomUser != self.clientParameters["jidUser"]:
-				if not self.usersList.has_key(roomUser):	
+				if roomUser not in self.usersList:	
 					userBox = pyuserBox(roomUser, self.clientParameters["jidServer"], self.jabberUser, self.interfaceGui)
 					self.usersList[roomUser] = userBox			
 				else:
@@ -382,7 +382,7 @@ class pyriunioni(QtGui.QMainWindow):
 				
 		if jid == self.clientParameters["jidChair"] and command == "/delRoomUser":
 			roomUser = str(parametersList.first())
-			if self.usersList.has_key(roomUser):
+			if roomUser in self.usersList:
 				userBox = self.usersList[roomUser]
 				userBox.presenceRoom(False)
 				
@@ -390,18 +390,18 @@ class pyriunioni(QtGui.QMainWindow):
 		if jid == self.clientParameters["jidChair"] and command == "/userRoomChecked":
 			roomUser = str(parametersList.first())
 			self.jabberUser.jidSubscribe(roomUser, True)
-			print "userRoomChecked: " + roomUser
+			print("userRoomChecked: " + roomUser)
 			
 		if jid == self.clientParameters["jidChair"] and command == "/msgRoom":
 			msgRoom = parametersList.join(" ")
 			self.interfaceGui.showMsg(msgRoom)
 			
 	def elabCommandFromServer(self, jid, msg):		
-		msgCommand = QtCore.QString(unicode(msg))
+		msgCommand = QtCore.QString(str(msg))
 		commandList = msgCommand.split(" ")
 		command = commandList.first()
 		parametersList = commandList.mid(1)	
-		print "command from server"
+		print("command from server")
 		
 		if jid == self.clientParameters["jidServer"] and command == "/abilitateDesktopSession":
 			self.clientParameters["passwdCtrlRemoteScreen"] = str(parametersList.takeFirst())
@@ -409,7 +409,7 @@ class pyriunioni(QtGui.QMainWindow):
 			self.clientParameters["ipRemoteScreen"] = str(parametersList.takeFirst())
 			self.localUserBox.initializeRemoteDesktop(self.clientParameters["ipRemoteScreen"], self.clientParameters["passwdCtrlRemoteScreen"], self.clientParameters["passwdViewRemoteScreen"])
 			
-			for userBox in self.usersRoomList.iteritems():
+			for userBox in self.usersRoomList.items():
 				userBox.initializeRemoteDesktop(self.clientParameters["ipRemoteScreen"], self.clientParameters["passwdCtrlRemoteScreen"], self.clientParameters["passwdViewRemoteScreen"])
 	
 	
@@ -424,7 +424,7 @@ class pyriunioni(QtGui.QMainWindow):
 				mediaId = str(parametersList.takeFirst())
 				jidChair = str(parametersList.takeFirst())
 				self.clientParameters["portToken"] = str(parametersList.takeFirst())
-				print "Connection to server === jidChair:", jidChair, " addrServer: ", self.clientParameters["ipAddrServer"], " tokenPortServer: ", self.clientParameters["portToken"]
+				print("Connection to server === jidChair:", jidChair, " addrServer: ", self.clientParameters["ipAddrServer"], " tokenPortServer: ", self.clientParameters["portToken"])
 				self.connectedChair = True
 				self.interfaceGui.ui.labelLinkToServer.setPixmap(QtGui.QPixmap(":/new/prefix2/images/actions/button_ok.png"))
 		# 		controllo per evitare che' l'operazione venga ripetuta inutilmente piu' volte
@@ -442,10 +442,10 @@ class pyriunioni(QtGui.QMainWindow):
 		
 					msgReq = "/mediaReq:" + mediaId
 					datagramReq = QtCore.QByteArray(msgReq)
-					print datagramReq
+					print(datagramReq)
 # invio del datagram su udp per informare farsi convalidare dal server					
 					self.udpSendReq.writeDatagram(datagramReq, destDatagramAddress, 8080)
-					print "labelLinkToServer On"
+					print("labelLinkToServer On")
 				
 			elif linkStatus == "False":
 				self.connectedChair = False	
@@ -486,13 +486,13 @@ class pyriunioni(QtGui.QMainWindow):
 			
 	
 	def readMedia(self, jidMedia):
-				print "readMedia ", jidMedia	
-				if self.usersList.has_key(jidMedia):
+				print("readMedia ", jidMedia)	
+				if jidMedia in self.usersList:
 					userBox = self.usersList[jidMedia]
 					userSlot = userBox.userSlot
-					if userBox.info.has_key("onGuiShow"):
+					if "onGuiShow" in userBox.info:
 						if userBox.info["onGuiShow"]:
-							if self.readMediaList.has_key(jidMedia):
+							if jidMedia in self.readMediaList:
 								infoMedia = self.readMediaList[jidMedia]
 								addressMedia = infoMedia[0]
 								portMedia = infoMedia[1]
@@ -507,32 +507,32 @@ class pyriunioni(QtGui.QMainWindow):
 									userSlot.ui.showMedia.setChecked(False)
 									userSlot.ui.showMedia.setEnabled(False)
 					else:
-						print "prematuro ReadMedia"
+						print("prematuro ReadMedia")
 		
 		
 		
 	def userRoomSubscriptionRequest(self, jid):
 		if jid:
-			print "subscriptionRequest from: " + jid 
+			print("subscriptionRequest from: " + jid) 
 			if jid == self.clientParameters["jidServer"]:
-				print "subscriptionRequest from server"
+				print("subscriptionRequest from server")
 				self.jabberUser.jidSubscribe(jid, True)		
 				
 			else:	
 				msgCheckJid = "/checkUserRoom " + jid
-				print "send to chair checkUserRoom of " + jid
+				print("send to chair checkUserRoom of " + jid)
 				self.localUserBox.sendMsg(msgCheckJid, True, self.clientParameters["jidChair"])
 			if self.chairModeStatus:
-				if self.usersRoomList.has_key(jid):
+				if jid in self.usersRoomList:
 					self.jabberUser.jidSubscribe(jid, True)
 				
 				
 	def chairMode(self, status):
 		self.chairModeStatus = status
 		if self.chairModeStatus:
-			for jidUser, userBox in self.usersList.iteritems():		
+			for jidUser, userBox in self.usersList.items():		
 				if jidUser != self.userJid:
-					print "deleteJidBeforeChair: " + jidUser
+					print("deleteJidBeforeChair: " + jidUser)
 					self.interfaceGui.delWindow(userBox)
 					self.interfaceGui.boxActivatedNumber = -1
 					userBox.info["onGuiShow"] = False
@@ -548,7 +548,7 @@ class pyriunioni(QtGui.QMainWindow):
 			self.localUserBox.sendMsg(msgActiveRemoteDesktop, True, self.clientParameters["jidServer"])			
 			md5PasswdCheckRequest = str(QtCore.QCryptographicHash.hash(self.clientParameters["passwdUser"], 1).toHex())
 			self.clientParameters["checkRiunioneRequest"] = "/sackstuff/index.py?userid=" + self.clientParameters["user"] + "&password=" + md5PasswdCheckRequest
-			print "Request HTTP GET: ", self.clientParameters["checkRiunioneRequest"]
+			print("Request HTTP GET: ", self.clientParameters["checkRiunioneRequest"])
 			self.httpRequestCheckRiunioni.get(self.clientParameters["checkRiunioneRequest"])
 			
 		else:
@@ -557,14 +557,14 @@ class pyriunioni(QtGui.QMainWindow):
 			self.interfaceGui.ui.actionNew.setEnabled(False)
 			self.interfaceGui.ui.actionDelete.setEnabled(False)
 			self.interfaceGui.webWidget.actionSpreadLink.setEnabled(False)
-			for jidUser, userBox in self.usersRoomList.iteritems():
-				print "delSlot in chairMode" + jidUser
+			for jidUser, userBox in self.usersRoomList.items():
+				print("delSlot in chairMode" + jidUser)
 				self.interfaceGui.delWindow(userBox)
 				self.interfaceGui.boxActivatedNumber = -1
 			self.usersRoomList = {}
-			for jidUser, userBox in self.usersList.iteritems():		
+			for jidUser, userBox in self.usersList.items():		
 				if jidUser != self.userJid:
-					print "addJidAfterChair: " + jidUser
+					print("addJidAfterChair: " + jidUser)
 					self.interfaceGui.newWindow(userBox)
 					userBox.info["onGuiShow"] = True
 					userBox.show()
@@ -573,7 +573,7 @@ class pyriunioni(QtGui.QMainWindow):
 	def 	httpCheckRiunioniRead(self):
 		partecipantsRiunione = QtCore.QString(self.httpRequestCheckRiunioni.readAll())
 		listPartecipantsRiunione = partecipantsRiunione.split(",")
-		print "read from http:", listPartecipantsRiunione
+		print("read from http:", listPartecipantsRiunione)
 		for partecipant in listPartecipantsRiunione:
 			if partecipant.length() < self.clientParameters["jidMaxLenght"] and not partecipant.contains(" "):
 				userJid = str(partecipant + "@" + self.clientParameters["urlServer"])
@@ -614,8 +614,8 @@ class pyriunioni(QtGui.QMainWindow):
 
 	def manageRoomUser(self, userJid, presence):
 		if presence:
-			if not self.usersRoomList.has_key(userJid):
-				if self.usersList.has_key(userJid):
+			if userJid not in self.usersRoomList:
+				if userJid in self.usersList:
 					userBox = self.usersList[userJid]
 				else:
 					userBox = pyuserBox(userJid, self.clientParameters["jidServer"], self.jabberUser, self.interfaceGui)
@@ -631,33 +631,33 @@ class pyriunioni(QtGui.QMainWindow):
 			userBox = self.usersRoomList[userJid]
 			userBox.presenceServer(False)
 			userBox.roomMode(False)
-			for userBox in self.usersRoomList.iteritems():
+			for userBox in self.usersRoomList.items():
 				if userBox.online:
 					msgDelRoomUser = "/delRoomUser " + userJid
 					userBox.sendMsg(msgDelRoomUser, True)
 			
 			
 	def elaborateCommandForChair(self, jid, msg):
-		msgCommand = QtCore.QString(unicode(msg))
+		msgCommand = QtCore.QString(str(msg))
 		commandList = msgCommand.split(" ")
 		command = commandList.first()
 		parametersList = commandList.mid(1)
-		print "command for Chair"
+		print("command for Chair")
 		
 		if command == "/checkUserRoom":
 			userCheckJid = str(parametersList.first())
-			if self.usersRoomList.has_key(userCheckJid):
+			if userCheckJid in self.usersRoomList:
 				userBox = self.usersRoomList[userCheckJid]
-				print "userBox.online " + str(userBox.online)
+				print("userBox.online " + str(userBox.online))
 				if userBox.online:
 					msgAnswerCommand = "/userRoomChecked " + userCheckJid
-					print "/userRoomChecked " + userCheckJid + " for Jid: " + jid
+					print("/userRoomChecked " + userCheckJid + " for Jid: " + jid)
 					self.localUserBox.sendMsg(msgAnswerCommand, True, jid)
 		
 		if command == "/setupChair":
 			setupChairStatus = str(parametersList.first())
 			if setupChairStatus == "True":
-				if self.usersRoomList.has_key(jid):
+				if jid in self.usersRoomList:
 					self.usersRoomCheck(jid)
 					
 		if command == "/msgToRoom":
@@ -665,26 +665,26 @@ class pyriunioni(QtGui.QMainWindow):
 			jidMsgReceived = QtCore.QString(jid)
 			jidMsgReceivedName = jidMsgReceived.left(jidMsgReceived.indexOf("@"))
 			stringMsgShow = "/msgRoom " + jidMsgReceivedName + ": " + msgRoom
-			for userBox in self.usersRoomList.iteritems():
+			for userBox in self.usersRoomList.items():
 				userBox.sendMsg(stringMsgShow, True)
 		
 		if command == "/focusRequest":
-			if self.usersRoomList.has_key(jid):
+			if jid in self.usersRoomList:
 				userBox = self.usersRoomList[jid]
 				userBox.focusRequest(True)
 		
 # da fare qualora e' sicuro che l'utente jid abbia settato la variabile self.clientParameters["jidChair"]
 	def usersRoomCheck(self, jid):
 # manda a tutti gli utenti l'avviso che si e' aggiunto alla Room l'utente jid
-		for jidUserRoom, userBox in self.usersRoomList.iteritems():
+		for jidUserRoom, userBox in self.usersRoomList.items():
 # DA TESTARE EFFETT			
 			if userBox.online:
 				msgUserConnected = "/newRoomUser " + jid
 				userBox.sendMsg(msgUserConnected, True)
 
 # manda all'utente che si e' aggiunto la lista degli utenti attualmente in Room
-		for jidUserRoom, userBox in self.usersRoomList.iteritems():
-			print "jidCheck " + jidUserRoom + ": " + str(userBox.online)
+		for jidUserRoom, userBox in self.usersRoomList.items():
+			print("jidCheck " + jidUserRoom + ": " + str(userBox.online))
 			if (jidUserRoom != jid) and userBox.online:
 				msgAddRoomUser = "/addRoomUser " + jidUserRoom
 				self.localUserBox.sendMsg(msgAddRoomUser, True, jid)
@@ -697,14 +697,14 @@ class pyriunioni(QtGui.QMainWindow):
 		self.aboutBox.setDetailedText (self.licenseText)
 		self.aboutBox.exec_()
 	def closeEvent(self, closeEvent):
-		print "close"		
+		print("close")		
 		
 
 if __name__ == '__main__':
-	app = QtGui.QApplication(sys.argv)
+	app = QtWidgets.QApplication(sys.argv)
 	locale = QtCore.QLocale()
 	country = locale.system().name()
-	print locale
+	print(locale)
 	qtTranslator = QtCore.QTranslator()
 	if qtTranslator.load("qt_" + country, ":/"):
 		app.installTranslator(qtTranslator)

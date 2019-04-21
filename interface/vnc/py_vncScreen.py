@@ -29,8 +29,8 @@ The class is "pyvncScreen", which is used to create a connection to a RFB remote
 # -*- coding: utf-8 -*-
 import sys
 import pyvnc	
-import py_vncKey as pyvncKey
-from PyQt4 import QtCore, QtGui
+from . import py_vncKey as pyvncKey
+from PyQt5 import QtCore, QtGui
 
 class pyvncScreen(QtGui.QLabel):
 	def __init__(self, parent=None):
@@ -92,7 +92,7 @@ class pyvncScreen(QtGui.QLabel):
 	def mouseReleaseEvent(self, mouseEvent):
 		self.mouseButtonPressed = 0
 		if self.vncCore and self.vncCore.connected:
-			print "release event" 
+			print("release event") 
 			self.vncCore.sendMouseEvent(mouseEvent.x(), mouseEvent.y(), self.mouseButtonPressed)
 
 	def keyPressEvent(self, keyPressEvent):
@@ -146,14 +146,14 @@ class pyvncCore(QtCore.QThread):
 		self.clientVnc = pyvnc.pyvncclient()
 		self.connected = False
 		connectionVnc = self.clientVnc.connect(host, display, passwd)
-		print "Connect return %d" % connectionVnc
+		print("Connect return %d" % connectionVnc)
 		if connectionVnc == 0:
 			self.connected = True
 			self.running = True
-			print "Connected to: '%s'" % (self.clientVnc.servername)
-			print "Fileno is %d" % (self.clientVnc.fileno())
-			print "Checkforupdates returned %d" % self.clientVnc.checkforupdates(1.0)
-			print "Updatedarea = ", self.clientVnc.updatedarea()
+			print("Connected to: '%s'" % (self.clientVnc.servername))
+			print("Fileno is %d" % (self.clientVnc.fileno()))
+			print("Checkforupdates returned %d" % self.clientVnc.checkforupdates(1.0))
+			print("Updatedarea = ", self.clientVnc.updatedarea())
 			self.width = self.clientVnc.width
 			self.height = self.clientVnc.height
 			self.image = QtGui.QImage()
@@ -163,7 +163,7 @@ class pyvncCore(QtCore.QThread):
 			# QtCore.QTimer.singleShot(11000, self.terminate)
 			# QtCore.QTimer.singleShot(20000, self.start)
 	def stop(self):
-		print "del vncCore"
+		print("del vncCore")
 		self.running = False
 # 		self.terminate()
 		self.wait()
@@ -200,11 +200,11 @@ class pyvncCore(QtCore.QThread):
 		
 		
 	def sendKeyEvent(self, key, keyModifier, down):
-		print "pyvncKey"
+		print("pyvncKey")
 # 		print pyvncKey.key[30]
-		print "key: ", key, " keyModifier: ", keyModifier, " down: ", down
+		print("key: ", key, " keyModifier: ", keyModifier, " down: ", down)
 		keyElaborated = None
-		if pyvncKey.key.has_key(key):
+		if key in pyvncKey.key:
 			if pyvncKey.key[key]:
 				keyElaborated = pyvncKey.key[key]
 				if QtCore.Qt.Key_A <= key <= QtCore.Qt.Key_Z  and  keyModifier == QtCore.Qt.ShiftModifier:
@@ -216,7 +216,7 @@ class pyvncCore(QtCore.QThread):
 # 				keyElaborated=key+0x20	
 		# elif key==
 		if keyElaborated:
-			print "keyElaborated: ", keyElaborated, "down: ", down
+			print("keyElaborated: ", keyElaborated, "down: ", down)
 			self.clientVnc.sendkeyevent(keyElaborated, down)
 
 

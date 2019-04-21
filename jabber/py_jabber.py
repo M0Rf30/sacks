@@ -31,7 +31,7 @@ The class is "pyjaber", which is used to create a connection to a xmpp server. I
 import sys
 import xmpp
 # import md5
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 
 class pyjabber(QtCore.QObject):
 	
@@ -108,7 +108,7 @@ class pyjabberCore(QtCore.QThread):
 		self.xmppConnect()
 		if self.connected == 1:
 			while 1:
-				print "elaborate"
+				print("elaborate")
 				self.clientXmpp.Process(1)	
 				
 				
@@ -163,7 +163,7 @@ class pyjabberCore(QtCore.QThread):
 
 	def xmppDisconnect(self):
 		self.terminate()
-		print "self.connected: " + str(self.connected)
+		print("self.connected: " + str(self.connected))
 		if self.connected == 1:
 			self.clientXmpp.disconnect()
 			clientXmpp = self.clientXmpp
@@ -239,7 +239,7 @@ class pyjabberCore(QtCore.QThread):
 			if not presence.getShow():
 				jidInfo = "available"
 			# vari casi di stato (occupato, non disponibile, ecc)	
-				if self.userListPresence.has_key(jid):
+				if jid in self.userListPresence:
 					if not self.userListPresence[jid]:
 						self.userListPresence[jid] = 1
 						event["jidPresence"] = jid
@@ -273,8 +273,8 @@ class pyjabberCore(QtCore.QThread):
 		
 		
 	def subscriptionRequestReceive(self, con, presence):	
-		print "con: " + str(con)
-		print "presence: " + str(presence)
+		print("con: " + str(con))
+		print("presence: " + str(presence))
 		event = {}
 		jid = presence.getFrom().getStripped()
 		event["subscriptionRequest"] = jid
@@ -282,7 +282,7 @@ class pyjabberCore(QtCore.QThread):
 # 		if jid=="laura@intellicom.eushells.net":
 # 			self.xmppJidSubscribe(jid)
 		
-		if self.userListPresence.has_key(jid) and self.userListPresence[jid] == -1:
+		if jid in self.userListPresence and self.userListPresence[jid] == -1:
 			self.xmppJidSubscribe(jid)
 			self.userListPresence[jid] = 1
 		

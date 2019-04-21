@@ -28,13 +28,13 @@ From this class it's possible to receive status events from server, send command
 
 
 import sys
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 from stream.py_userSlot import pyuserSlot
 
-class pyuserBox(QtGui.QWidget):
+class pyuserBox(QtWidgets.QWidget):
 	
 	def __init__(self, nameSlot, roomJidServer, jabberUser, interfaceGui=None, parent=None):
-		QtGui.QWidget.__init__(self, parent)
+		QtWidgets.QWidget.__init__(self, parent)
 		self.jabberUser = jabberUser
 		self.nameSlot = nameSlot
 		self.interfaceGui = interfaceGui
@@ -48,7 +48,7 @@ class pyuserBox(QtGui.QWidget):
 		self.BoxLayout.setMargin(0)
 		self.BoxLayout.addWidget(self.userSlot)
 		if self.interfaceGui:
-			print "self.interfaceGui.voipInterface.voipSession.registered ", self.interfaceGui.voipInterface.voipSession.registered
+			print("self.interfaceGui.voipInterface.voipSession.registered ", self.interfaceGui.voipInterface.voipSession.registered)
 			self.userSlot.pushButtonVoipCall.setEnabled(self.interfaceGui.voipInterface.voipSession.registered)
 		self.tokenAbilitated = False
 		self.remoteDesktopAddress = None
@@ -83,7 +83,7 @@ class pyuserBox(QtGui.QWidget):
 	
 	
 	def initializeRemoteDesktop(self, IP, ctrlRemoteDesktop, viewRemoteDesktop):
-		print "initializeRemoteDesktop on", self.nameSlot, ": ", IP, ctrlRemoteDesktop, viewRemoteDesktop
+		print("initializeRemoteDesktop on", self.nameSlot, ": ", IP, ctrlRemoteDesktop, viewRemoteDesktop)
 		self.ipRemoteDesktop = IP
 		self.viewRemoteDesktop = viewRemoteDesktop
 		self.ctrlRemoteDesktop = ctrlRemoteDesktop
@@ -91,7 +91,7 @@ class pyuserBox(QtGui.QWidget):
 
 
 	def roomMode(self, roomModeStatus):
-		print "room modee per " , self.nameSlot, " ", roomModeStatus
+		print("room modee per " , self.nameSlot, " ", roomModeStatus)
 		# l'icona parte disabilitata perche' in room mode puo' partire che non e' presente
 		self.iconUser = self.userSlot.iconUserDisabled
 		if roomModeStatus:
@@ -131,7 +131,7 @@ class pyuserBox(QtGui.QWidget):
 						msgActiveToken = "/userFocus " + self.nameSlot + " True"
 					else:	
 						msgActiveToken = "/userFocus " + self.nameSlot + " False"
-					print userBox.nameSlot, " " , msgActiveToken
+					print(userBox.nameSlot, " " , msgActiveToken)
 					userBox.sendMsg(msgActiveToken, True)
 			self.tokenAbilitated = abilitated
 			if abilitated:
@@ -151,7 +151,7 @@ class pyuserBox(QtGui.QWidget):
 	
 
 	def connection(self, connected):
-		print "connected: " + str(connected)
+		print("connected: " + str(connected))
 		if connected == 1:
 			self.userSlot.pushButtonActiveMedia.setEnabled(True)
 	
@@ -170,7 +170,7 @@ class pyuserBox(QtGui.QWidget):
 			msgAddUserServer = "/linkUserServer " + self.nameSlot + " True"
 			self.sendMsg(msgAddUserServer, True, self.roomJidServer)
 			self.userSlot.pushButtonToken.setEnabled(True)
-			if self.jabberUser.listPresence.has_key(self.nameSlot):
+			if self.nameSlot in self.jabberUser.listPresence:
 				if self.jabberUser.listPresence[self.nameSlot] == True:
 					self.presence(True)
 					msgPresence = "/presenceUser " + self.nameSlot + " True"
@@ -254,7 +254,7 @@ class pyuserBox(QtGui.QWidget):
 				else:	
 					msgDesktopSession = "/remoteDesktop " + self.nameSlot + " False"
 				
-				print "sendMsg ", msgDesktopSession
+				print("sendMsg ", msgDesktopSession)
 				userBox.sendMsg(msgDesktopSession, True)	
 							
 					
@@ -274,14 +274,14 @@ class pyuserBox(QtGui.QWidget):
 				if not self.focusStatus:
 					pushButtonShowMediaStatus = self.userSlot.pushButtonShowMedia.isChecked()
 					itemverticalLayout = self.interfaceGui.ui.verticalLayoutFocus.itemAt(0)
-					print "itemverticalLayout ", itemverticalLayout
+					print("itemverticalLayout ", itemverticalLayout)
 					if itemverticalLayout:
 						widgetOnFocus = itemverticalLayout.widget()
-						print "widgetOnFocus ", widgetOnFocus
+						print("widgetOnFocus ", widgetOnFocus)
 						for userBoxIndex in range(self.interfaceGui.ui.toolBox.count()):
-							print "userBox ", userBoxIndex
+							print("userBox ", userBoxIndex)
 							userBox = self.interfaceGui.ui.toolBox.widget(userBoxIndex)
-							print "userBox.userSlot.mdiWin ", userBox.userSlot.mdiWin
+							print("userBox.userSlot.mdiWin ", userBox.userSlot.mdiWin)
 							if userBox.userSlot.mdiWin == widgetOnFocus:
 								userBox.userSlot.buttonOnFocus.setChecked(False)
 					self.userSlot.mdiWin.close()					
@@ -325,7 +325,7 @@ class pyuserBox(QtGui.QWidget):
 	def screenSession(self, abilitated):		
 		if abilitated:
 			parameters = (self.remoteDesktopAddress, self.remoteDesktopDisplay, self.remoteDesktopPasswd)
-			print parameters
+			print(parameters)
 			self.interfaceGui.remoteDesktopInterface.stop()
 			self.interfaceGui.remoteDesktopInterface.setScreenParameters(parameters)
 			self.interfaceGui.remoteDesktopInterface.launch()
@@ -344,10 +344,10 @@ class pyuserBox(QtGui.QWidget):
 			for userBoxIndex in range(self.interfaceGui.ui.toolBox.count()):
 				userBox = self.interfaceGui.ui.toolBox.widget(userBoxIndex)
 				if userBox.info["onGuiShow"]:
-					print "remoteDesktop ", userBox.nameSlot, " State: ", userBox.remoteDesktopAddress
+					print("remoteDesktop ", userBox.nameSlot, " State: ", userBox.remoteDesktopAddress)
 					if userBox != self and userBox.remoteDesktopAddress:
 						remoteDesktopEmpty = False
-			print "remoteDesktopEmpty: ", remoteDesktopEmpty			
+			print("remoteDesktopEmpty: ", remoteDesktopEmpty)			
 			if remoteDesktopEmpty:			
 				self.interfaceGui.remoteDesktopInterface.stop()
 		
@@ -392,7 +392,7 @@ class pyuserBox(QtGui.QWidget):
 			voipInterface.lineEditUrlVoip.setText("")
 			self.interfaceGui.setCurrentDock(self.interfaceGui.ui.dockWidgetVoip)
 			voipInterface.ui.pushButtonCall.animateClick(1000)
-			print "call"
+			print("call")
 			
 			
 	def focusRequest(self, abilitated):
@@ -413,15 +413,15 @@ class pyuserBox(QtGui.QWidget):
 # 		if not registered:
 # 			self.userSlot.buttonRemoteDesktop.setChecked(False)
 	def closeEvent(self, closeEvent):	
-		print "close userBox"
+		print("close userBox")
 		
-from jabber.py_jabber import pyjabber
+#from jabber.py_jabber import pyjabber
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
-	a = pyjabber()
+	#a = pyjabber()
 	
-	box = pyuserBox("marcello", a)
-	b = box.userSlot
+	#box = pyuserBox("marcello", a)
+	#b = box.userSlot
 	# box.show()
 # 	c=QtGui.QToolBox()
 # 	c.addItem(b, "uyyu")
